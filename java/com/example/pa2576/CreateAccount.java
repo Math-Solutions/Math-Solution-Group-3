@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +19,9 @@ public class CreateAccount extends AppCompatActivity {
     EditText createPassword;
     EditText createPassword2;
     Button createAccount;
+    CheckBox checkBoxGDPR;
+    CheckBox checkBoxRules;
+    TextView welcomeText;
 
 
     @Override
@@ -24,8 +29,9 @@ public class CreateAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-
-
+        welcomeText = findViewById(R.id.welcome);
+        checkBoxGDPR = findViewById(R.id.checkBoxGDPR);
+        checkBoxRules = findViewById(R.id.checkBoxRules);
         firstName = findViewById(R.id.createFirstName);
         lastName = findViewById(R.id.createLastName);
         eMail = findViewById(R.id.createEmail);
@@ -38,9 +44,11 @@ public class CreateAccount extends AppCompatActivity {
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //if( checkIfFilled())
+               if( checkIfFilled()){
+                   openSignInPage();
+               }
 
-               // openSignInPage();
+
             }
 
 
@@ -59,10 +67,11 @@ public class CreateAccount extends AppCompatActivity {
 
     public boolean checkIfFilled(){
 
-        if(checkUsername() && firstName.getText().toString().isEmpty() && lastName.getText().toString().isEmpty() && eMail.getText().toString().isEmpty())
-            return true;
-        else
+        if(!checkBoxRules.isChecked() || !checkBoxGDPR.isChecked() || checkUsername() || checkPassword() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty() || eMail.getText().toString().isEmpty())
             return false;
+        else
+            welcomeText.setText("Allt är ifyllt");
+            return true;
 
     }
 
@@ -106,8 +115,6 @@ public class CreateAccount extends AppCompatActivity {
                 return true;
 
             }
-
-
         }
         return false;
     }
