@@ -1,6 +1,7 @@
 package com.example.pa2576;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -70,6 +71,7 @@ public class CreateAccount extends AppCompatActivity {
     public boolean checkIfFilled() {
 
         if (!checkBoxGDPR.isChecked() || !checkBoxRules.isChecked() || createUsername.getText().toString().isEmpty() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty()){
+            setColor();
             notFilled.setText("Please fill in all the things that are red");
         return false;
         }
@@ -85,6 +87,18 @@ public class CreateAccount extends AppCompatActivity {
             return true;
 
     }
+
+    private void setColor() {
+    firstName.setHighlightColor(Color.RED);
+    lastName.setHighlightColor(Color.RED);
+    createUsername.setHighlightColor(Color.RED);
+    eMail.setHighlightColor(Color.RED);
+    checkBoxRules.setHighlightColor(Color.RED);
+    checkBoxGDPR.setHighlightColor(Color.RED);
+    createPassword.setHighlightColor(Color.RED);
+    createPassword2.setHighlightColor(Color.RED);
+    }
+
 
 
     public boolean checkPassword() {
