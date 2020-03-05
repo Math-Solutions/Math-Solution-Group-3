@@ -107,4 +107,11 @@
     <string name="createPassword2">***********</string>
     <string name="i_agree_to_follow_the_rules_on_this_app">I agree to follow the rules on this app</string>
     <string name="i_agree_to_the_use_of_my_personal_information_according_to_gdprs_laws">I agree to the use of my personal information according to GDPRs laws</string>
+    <string name="passwordText">Password</string>
+    <string name="atleast_one_digit_0_9">Atleast one Digit (0-9)</string>
+    <string name="atleast_one_uppercase_letter_a">Atleast one Uppercase letter (A-Ö)</string>
+    <string name="the_password_needs_to_fill_these_critera">The password needs to fill these critera:</string>
+    <string name="atleast_8_characters_long">Atleast 8 Characters Long</string>
+    <string name="please_make_sure_that_everything_have_been_filled_in">Please make sure that everything have been filled in</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
