@@ -98,7 +98,15 @@
             app:layout_constraintTop_toBottomOf="@+id/createEmail" />
 
 
-
+        <TextView
+            android:id="@+id/passwordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/passwordText"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/createPassword"
@@ -106,12 +114,22 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:layout_marginStart="100dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:importantForAutofill="no"
             android:ems="10"
             android:hint="@string/createPassword"
             android:inputType="textPassword" />
 
+
+        <TextView
+            android:id="@+id/passwordText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm_password"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/createPassword2"
@@ -119,11 +137,51 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:layout_marginStart="100dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:ems="10"
             android:hint="@string/createPassword2"
             android:inputType="textPassword"
             android:importantForAutofill="no"/>
+
+        <TextView
+            android:id="@+id/passwordCriteria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/the_password_needs_to_fill_these_critera"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/password8char"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/atleast_8_characters_long"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/passwordUppercaseLetter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/atleast_one_uppercase_letter_a"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/passwordDigit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/atleast_one_digit_0_9"
+            android:textSize="14sp" />
 
         <CheckBox
             android:id="@+id/checkBoxGDPR"
@@ -144,6 +202,16 @@
             android:layout_marginLeft="60dp"
             android:text="@string/i_agree_to_follow_the_rules_on_this_app"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/notFilled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginLeft="60sp"
+            android:layout_marginStart="60sp"
+            android:layout_marginTop="20sp" />
 
         <Button
             android:id="@+id/createAccount"

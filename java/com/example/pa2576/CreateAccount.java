@@ -22,6 +22,7 @@ public class CreateAccount extends AppCompatActivity {
     CheckBox checkBoxGDPR;
     CheckBox checkBoxRules;
     TextView welcomeText;
+    TextView notFilled;
 
 
     @Override
@@ -38,6 +39,7 @@ public class CreateAccount extends AppCompatActivity {
         createUsername = findViewById(R.id.createUsername);
         createPassword = findViewById(R.id.createPassword);
         createPassword2 = findViewById(R.id.createPassword2);
+        notFilled = findViewById(R.id.notFilled);
 
         createAccount = findViewById(R.id.createAccount);
 
@@ -65,12 +67,21 @@ public class CreateAccount extends AppCompatActivity {
     }
 
 
-    public boolean checkIfFilled(){
+    public boolean checkIfFilled() {
 
-        if(!checkBoxRules.isChecked() || !checkBoxGDPR.isChecked() || checkUsername() || checkPassword() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty() || eMail.getText().toString().isEmpty())
+        if (!checkBoxGDPR.isChecked() || !checkBoxRules.isChecked() || createUsername.getText().toString().isEmpty() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty()){
+            notFilled.setText("Please fill in all the things that are red");
+        return false;
+        }
+        else if(!checkPassword()){
+            notFilled.setText("The password does not match the critera or the two passwords do not match");
             return false;
+        }
+        else if(checkUsername()){
+            notFilled.setText("Username already exists");
+            return false;
+        }
         else
-            welcomeText.setText("Allt är ifyllt");
             return true;
 
     }
