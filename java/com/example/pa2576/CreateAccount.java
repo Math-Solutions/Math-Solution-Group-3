@@ -24,6 +24,8 @@ public class CreateAccount extends AppCompatActivity {
     CheckBox checkBoxRules;
     TextView welcomeText;
     TextView notFilled;
+    TextView passwordText;
+    TextView passwordText2;
 
 
     @Override
@@ -41,6 +43,8 @@ public class CreateAccount extends AppCompatActivity {
         createPassword = findViewById(R.id.createPassword);
         createPassword2 = findViewById(R.id.createPassword2);
         notFilled = findViewById(R.id.notFilled);
+        passwordText = findViewById(R.id.passwordText);
+        passwordText2 = findViewById(R.id.passwordText2);
 
         createAccount = findViewById(R.id.createAccount);
 
@@ -70,33 +74,46 @@ public class CreateAccount extends AppCompatActivity {
 
     public boolean checkIfFilled() {
 
+        String red = "#ba160c";
+        
         if (!checkBoxGDPR.isChecked() || !checkBoxRules.isChecked() || createUsername.getText().toString().isEmpty() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty()){
-            setColor();
+            setColorText(red);
             notFilled.setText("Please fill in all the things that are red");
         return false;
         }
-        else if(!checkPassword()){
-            notFilled.setText("The password does not match the critera or the two passwords do not match");
-            return false;
-        }
         else if(checkUsername()){
+            createUsername.setTextColor(Color.parseColor(red));
             notFilled.setText("Username already exists");
             return false;
         }
-        else
+        else if(!checkPassword()){
+            setcolorPassword(red);
+            notFilled.setText("The password does not match the criteria or the two passwords do not match");
+
+            return false;
+        }
+        else {
+
             return true;
+        }
 
     }
 
-    private void setColor() {
-    firstName.setHighlightColor(Color.RED);
-    lastName.setHighlightColor(Color.RED);
-    createUsername.setHighlightColor(Color.RED);
-    eMail.setHighlightColor(Color.RED);
-    checkBoxRules.setHighlightColor(Color.RED);
-    checkBoxGDPR.setHighlightColor(Color.RED);
-    createPassword.setHighlightColor(Color.RED);
-    createPassword2.setHighlightColor(Color.RED);
+    private void setColorText(String color) {
+
+        firstName.setHintTextColor(Color.parseColor(color));
+        lastName.setHintTextColor(Color.parseColor(color));
+        createUsername.setHintTextColor(Color.parseColor(color));
+        eMail.setHintTextColor(Color.parseColor(color));
+        checkBoxGDPR.setTextColor(Color.parseColor(color));
+        checkBoxRules.setTextColor(Color.parseColor(color));
+
+    }
+
+    private void setcolorPassword(String color){
+
+        passwordText.setTextColor(Color.parseColor(color));
+        passwordText2.setTextColor(Color.parseColor(color));
     }
 
 
