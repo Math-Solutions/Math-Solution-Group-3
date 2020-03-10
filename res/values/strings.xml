@@ -114,4 +114,16 @@
     <string name="atleast_8_characters_long">Atleast 8 Characters Long</string>
     <string name="please_make_sure_that_everything_have_been_filled_in">Please make sure that everything have been filled in</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="choose_education">Choose Education</string>
+    <string name="civilingenj_r_i_ai_och_maskininl_rning">Civilingenjör i AI och maskininlärning</string>
+    <string name="civilingenj_r_i_mjukvaruutveckling">Civilingenjör i mjukvaruutveckling</string>
+    <string name="software_engineering">Software Engineering</string>
+    <string name="civilingenj_r_i_dators_kerhet">Civilingenjör i datorsäkerhet</string>
+    <string name="h_gskoleingenj_r_i_it_s_kerhet">Högskoleingenjör i IT-säkerhet</string>
+    <string name="civilingenj_r_i_industriell_ekonomi">Civilingenjör i industriell ekonomi</string>
+    <string name="civilingenj_r_i_marin_teknik">Civilingenjör i marin teknik</string>
+    <string name="civilingenj_r_i_maskinteknik">Civilingenjör i maskinteknik</string>
+    <string name="h_gskoleingenj_r_i_maskinteknik">Högskoleingenjör i maskinteknik</string>
+    <string name="spelprogrammering">Spelprogrammering</string>
+    <string name="other_education">Other Education</string>
 </resources>
