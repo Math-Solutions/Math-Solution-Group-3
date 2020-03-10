@@ -77,8 +77,127 @@
             app:layout_constraintTop_toBottomOf="@+id/createLastName" />
 
 
+        <TextView
+            android:id="@+id/chooseEducation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/choose_education"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/civAI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/civilingenj_r_i_ai_och_maskininl_rning"
+            android:textSize="18sp"  />
 
 
+        <CheckBox
+            android:id="@+id/civMjukvaru"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/civilingenj_r_i_mjukvaruutveckling"
+            android:textSize="18sp"  />
+
+
+        <CheckBox
+            android:id="@+id/software"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/software_engineering"
+            android:textSize="18sp"  />
+        <CheckBox
+            android:id="@+id/civSak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/civilingenj_r_i_dators_kerhet"
+            android:textSize="18sp"  />
+        <CheckBox
+            android:id="@+id/hogSak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/h_gskoleingenj_r_i_it_s_kerhet"
+            android:textSize="18sp"  />
+
+        <CheckBox
+            android:id="@+id/civIndek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/civilingenj_r_i_industriell_ekonomi"
+            android:textSize="18sp"  />
+
+        <CheckBox
+            android:id="@+id/civMarin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/civilingenj_r_i_marin_teknik"
+            android:textSize="18sp"  />
+
+        <CheckBox
+            android:id="@+id/civMaskin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/civilingenj_r_i_maskinteknik"
+            android:textSize="18sp"  />
+
+        <CheckBox
+            android:id="@+id/hogMaskin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/h_gskoleingenj_r_i_maskinteknik"
+            android:textSize="18sp"  />
+
+        <CheckBox
+            android:id="@+id/civSpel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="Civilingenjör i spel- och programvaruteknik"
+            android:textSize="18sp"  />
+
+        <CheckBox
+            android:id="@+id/hogSpel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/spelprogrammering"
+            android:textSize="18sp"  />
+
+        <CheckBox
+            android:id="@+id/educationElse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
+            android:text="@string/other_education"
+            android:textSize="18sp"  />
 
 
 

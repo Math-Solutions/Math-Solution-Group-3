@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class CreateAccount extends AppCompatActivity {
 
     EditText firstName;
@@ -26,7 +28,19 @@ public class CreateAccount extends AppCompatActivity {
     TextView notFilled;
     TextView passwordText;
     TextView passwordText2;
+    TextView chooseEducation;
+    CheckBox civAI;
+    CheckBox civSak;
+    CheckBox hogSak;
+    CheckBox civIndek;
+    CheckBox civMarin;
+    CheckBox civMaskin;
+    CheckBox hogMaskin;
+    CheckBox civSpel;
+    CheckBox hogSpel;
+    CheckBox educationElse;
 
+    ArrayList<CheckBox> educationArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +59,35 @@ public class CreateAccount extends AppCompatActivity {
         notFilled = findViewById(R.id.notFilled);
         passwordText = findViewById(R.id.passwordText);
         passwordText2 = findViewById(R.id.passwordText2);
+        chooseEducation = findViewById(R.id.chooseEducation);
+
+
+        //All buttons for educations
+        civAI = findViewById(R.id.civAI);
+        civSak = findViewById(R.id.civSak);
+        hogSak = findViewById(R.id.hogSak);
+        civIndek = findViewById(R.id.civIndek);
+        civMarin = findViewById(R.id.civMarin);
+        civMaskin = findViewById(R.id.civMaskin);
+        hogMaskin = findViewById(R.id.hogMaskin);
+        civSpel = findViewById(R.id.civSpel);
+        hogSpel = findViewById(R.id.hogSpel);
+        educationElse = findViewById(R.id.educationElse);
+
+        //Array for the educations checkboxes
+
+
+
+        educationArray.add(civAI);
+        educationArray.add(civSak);
+        educationArray.add(hogSak);
+        educationArray.add(civIndek);
+        educationArray.add(civMarin);
+        educationArray.add(civMaskin);
+        educationArray.add(hogMaskin);
+        educationArray.add(civSpel);
+        educationArray.add(hogSpel);
+        educationArray.add(educationElse);
 
         createAccount = findViewById(R.id.createAccount);
 
@@ -75,11 +118,16 @@ public class CreateAccount extends AppCompatActivity {
     public boolean checkIfFilled() {
 
         String red = "#ba160c";
-        
+
         if (!checkBoxGDPR.isChecked() || !checkBoxRules.isChecked() || createUsername.getText().toString().isEmpty() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty()){
             setColorText(red);
             notFilled.setText("Please fill in all the things that are red");
         return false;
+        }
+        else if(!checkEducation()){
+            chooseEducation.setText("choose ONE Education");
+            chooseEducation.setTextColor(Color.parseColor(red));
+            return false;
         }
         else if(checkUsername()){
             createUsername.setTextColor(Color.parseColor(red));
@@ -92,11 +140,39 @@ public class CreateAccount extends AppCompatActivity {
 
             return false;
         }
-        else {
+        else if(!checkEmail()){
+            setcolorPassword(red);
+            notFilled.setText("The password does not match the criteria or the two passwords do not match");
 
+            return false;
+        }
+
+        else {
             return true;
         }
 
+    }
+
+    private boolean checkEducation() {
+        int index = 0;
+
+        for (CheckBox i : educationArray){
+            if(i.isChecked()){
+                index++;
+            }
+        }
+        if(index==1){
+            return true;
+        }
+        else
+        return false;
+    }
+
+    private boolean checkEmail() {
+
+
+
+        return false;
     }
 
     private void setColorText(String color) {
