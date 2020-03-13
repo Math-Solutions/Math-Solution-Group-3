@@ -1,6 +1,7 @@
 package com.example.pa2576;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,9 @@ public class Courses extends AppCompatActivity {
 
     ArrayList<Button> btnArray = new ArrayList<>();
 
+    ArrayList<String> mathCourses = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,14 +51,6 @@ public class Courses extends AppCompatActivity {
         btn12 = findViewById(R.id.button12);
         btn13 = findViewById(R.id.button13);
 
-
-        addBtn();
-
-        setTextBtn();
-    }
-
-    private void addBtn() {
-
         btnArray.add(btn1);
         btnArray.add(btn2);
         btnArray.add(btn3);
@@ -69,11 +65,6 @@ public class Courses extends AppCompatActivity {
         btnArray.add(btn12);
         btnArray.add(btn13);
 
-    }
-    private void setTextBtn() {
-
-        ArrayList<String> mathCourses = new ArrayList<>();
-
         mathCourses.add("linear Algebra");
         mathCourses.add("Diskret");
         mathCourses.add("Analys 1");
@@ -84,10 +75,26 @@ public class Courses extends AppCompatActivity {
 
 
 
+        setTextBtn();
+    }
 
-        for(int i=0; i<btnArray.size();i++){
-           btnArray.get(i).setText(mathCourses.get(i));
+    public void setTextBtn() {
+
+
+
+
+
+
+        for(int i=0; i<mathCourses.size();i++) {
+            btnArray.get(i).setText(mathCourses.get(i));
         }
+        for(int i=0; i<btnArray.size();i++) {
+           if(btnArray.get(i).getText().equals("")){
+               btnArray.get(i).setVisibility(View.GONE);
+           }
+
+        }
+
 
     }
 }
