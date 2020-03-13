@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-        usernameLogin = (EditText) findViewById(R.id.userNameLogin);
-        password = (EditText) findViewById(R.id.password);
+        usernameLogin = findViewById(R.id.userNameLogin);
+        password = findViewById(R.id.password);
 
         Button signINBtn =  findViewById(R.id.signInBtn);
         Button createAccount = findViewById(R.id.createAccountBtn);
@@ -39,18 +39,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.signInBtn:
                 if(checkSignIN()) {
-                    //openHomePage();
+                    openCourse();
                 }
                 break;
             case R.id.createAccountBtn:
                 openCreateAccount();
                 break;
+            case R.id.forgotbtn:
+                openCourse();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
         }
+    }
+
+    private void openCourse() {
+        Intent intent = new Intent(this, Courses.class);
+        startActivity(intent);
     }
 
     public boolean checkSignIN() {
 
-        TextView incorrectLogin = (TextView) findViewById(R.id.wrongUserOrPass);
+        TextView incorrectLogin = findViewById(R.id.wrongUserOrPass);
         String[][] checkLoginArray = new String[4][2];
 
         checkLoginArray[0][0] = "Emil123";
@@ -64,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkLoginArray[3][1] = "malinKronvall";
 
 
-        for (int i = 0; i < checkLoginArray.length; i++) {
+        for (String[] strings : checkLoginArray) {
 
-            if ((usernameLogin.getText().toString()).equals(checkLoginArray[i][0]) && password.getText().toString().equals(checkLoginArray[i][1])) {
+            if ((usernameLogin.getText().toString()).equals(strings[0]) && password.getText().toString().equals(strings[1])) {
                 incorrectLogin.setText("Det funka");
                 return true;
 
