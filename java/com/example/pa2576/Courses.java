@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Courses extends AppCompatActivity {
 
-    int index =13;
+
     Button btn1;
     Button btn2;
     Button btn3;
