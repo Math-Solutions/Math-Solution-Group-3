@@ -8,62 +8,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class Courses extends AppCompatActivity {
-
-
-    Button btn1;
-    Button btn2;
-    Button btn3;
-    Button btn4;
-    Button btn5;
-    Button btn6;
-    Button btn7;
-    Button btn8;
-    Button btn9;
-    Button btn10;
-    Button btn11;
-    Button btn12;
-    Button btn13;
-
+public class Courses extends AppCompatActivity implements View.OnClickListener {
+    ArrayList<Integer> idArray = new ArrayList<>();
 
     ArrayList<Button> btnArray = new ArrayList<>();
 
     ArrayList<String> mathCourses = new ArrayList<>();
 
+    ArrayList<String> physicsCourses = new ArrayList<>();
+
+    int index =1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
+        idArray.add(R.id.button1);
+        idArray.add(R.id.button2);
+        idArray.add(R.id.button3);
+        idArray.add(R.id.button4);
+        idArray.add(R.id.button5);
+        idArray.add(R.id.button6);
+        idArray.add(R.id.button7);
+        idArray.add(R.id.button8);
+        idArray.add(R.id.button9);
+        idArray.add(R.id.button10);
+        idArray.add(R.id.button11);
+        idArray.add(R.id.button12);
+        idArray.add(R.id.button13);
 
-        btn1 = findViewById(R.id.button1);
-        btn2 = findViewById(R.id.button2);
-        btn3 = findViewById(R.id.button3);
-        btn4 = findViewById(R.id.button4);
-        btn5 = findViewById(R.id.button5);
-        btn6 = findViewById(R.id.button6);
-        btn7 = findViewById(R.id.button7);
-        btn8 = findViewById(R.id.button8);
-        btn9 = findViewById(R.id.button9);
-        btn10 = findViewById(R.id.button10);
-        btn11 = findViewById(R.id.button11);
-        btn12 = findViewById(R.id.button12);
-        btn13 = findViewById(R.id.button13);
 
-        btnArray.add(btn1);
-        btnArray.add(btn2);
-        btnArray.add(btn3);
-        btnArray.add(btn4);
-        btnArray.add(btn5);
-        btnArray.add(btn6);
-        btnArray.add(btn7);
-        btnArray.add(btn8);
-        btnArray.add(btn9);
-        btnArray.add(btn10);
-        btnArray.add(btn11);
-        btnArray.add(btn12);
-        btnArray.add(btn13);
+        for (int id: idArray) {
+            Button btn = findViewById(id);
+            btnArray.add(btn);
+
+
+        }
 
         mathCourses.add("linear Algebra");
         mathCourses.add("Diskret");
@@ -73,17 +54,62 @@ public class Courses extends AppCompatActivity {
         mathCourses.add("Statestik");
         mathCourses.add("Matte grundkurs");
 
+        physicsCourses.add("physics1");
+        physicsCourses.add("physics2");
+        physicsCourses.add("physics3");
+
+        if(index == 0) {
+            setTextBtnMath();
+        }
+        else if(index == 1){
+            setTextBtnPhys();
+        }
+
+        for (int i = 0; i < btnArray.size(); i++) {
+            btnArray.get(i).setOnClickListener( this);
+        }
 
 
-        setTextBtn();
     }
 
-    public void setTextBtn() {
 
 
+    public void onClick(View v) {
+        switch (v.getId()){
+            default:
+                if(index == 0) {
+                    checkPressedBtnMath(v.getId());
+                }
+                else if(index == 1){
+                    checkPressedBtnPhys(v.getId());
+                }
+                break;
+        }
+    }
+
+    private void checkPressedBtnPhys(int id) {
+
+        for (int i = 0; i <btnArray.size() ; i++) {
+            if(btnArray.get(i).getId() == id){
+                //Add Intens to physics chapters
+            }
+        }
+    }
 
 
+    private void checkPressedBtnMath(int id) {
 
+
+        for (int i = 0; i <btnArray.size() ; i++) {
+            if(btnArray.get(i).getId() == id){
+                //Add Intens to physics chapters
+            }
+        }
+
+    }
+
+
+    public void setTextBtnMath(){
 
         for(int i=0; i<mathCourses.size();i++) {
             btnArray.get(i).setText(mathCourses.get(i));
@@ -97,5 +123,18 @@ public class Courses extends AppCompatActivity {
 
 
     }
-}
+    private void setTextBtnPhys() {
 
+        for(int i=0; i<physicsCourses.size();i++) {
+            btnArray.get(i).setText(physicsCourses.get(i));
+        }
+        for(int i=0; i<btnArray.size();i++) {
+            if(btnArray.get(i).getText().equals("")){
+                btnArray.get(i).setVisibility(View.GONE);
+            }
+
+        }
+    }
+
+
+}
