@@ -1,5 +1,6 @@
 package com.example.pa2576;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<String> physicsCourses = new ArrayList<>();
 
-    int index =1;
+    int index =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,10 +103,17 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
         for (int i = 0; i <btnArray.size() ; i++) {
             if(btnArray.get(i).getId() == id){
-                //Add Intens to physics chapters
+                openChapters();
             }
         }
 
+    }
+
+    private void openChapters() {
+
+        Intent intent = new Intent(this, Chapter.class);
+        //intent.putExtra("Length", 10);
+        startActivity(intent);
     }
 
 
