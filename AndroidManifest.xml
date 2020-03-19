@@ -29,6 +29,7 @@
         <activity android:name=".MyUploads" />
         <activity android:name=".ProfilePage" />
         <activity android:name=".Books" />
+
     </application>
 
 </manifest>
