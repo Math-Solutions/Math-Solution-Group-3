@@ -10,15 +10,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class Courses extends AppCompatActivity implements View.OnClickListener {
+
+
     ArrayList<Integer> idArray = new ArrayList<>();
 
     ArrayList<Button> btnArray = new ArrayList<>();
 
     ArrayList<String> mathCourses = new ArrayList<>();
-
+    ArrayList<Integer> mathNrChapters = new ArrayList<>();
     ArrayList<String> physicsCourses = new ArrayList<>();
 
     int index =0;
+    int number=10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,15 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         mathCourses.add("Statestik");
         mathCourses.add("Matte grundkurs");
 
+        mathNrChapters.add(12);
+        mathNrChapters.add(3);
+        mathNrChapters.add(7);
+        mathNrChapters.add(13);
+        mathNrChapters.add(6);
+        mathNrChapters.add(11);
+        mathNrChapters.add(10);
+
+
         physicsCourses.add("physics1");
         physicsCourses.add("physics2");
         physicsCourses.add("physics3");
@@ -66,7 +78,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
             setTextBtnPhys();
         }
 
-        for (int i = 0; i < btnArray.size(); i++) {
+        for (int i = 0; i < mathCourses.size(); i++) {
             btnArray.get(i).setOnClickListener( this);
         }
 
@@ -88,7 +100,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private void checkPressedBtnPhys(int id) {
+    public void checkPressedBtnPhys(int id) {
 
         for (int i = 0; i <btnArray.size() ; i++) {
             if(btnArray.get(i).getId() == id){
@@ -98,21 +110,22 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    private void checkPressedBtnMath(int id) {
+    public void checkPressedBtnMath(int id) {
 
 
         for (int i = 0; i <btnArray.size() ; i++) {
             if(btnArray.get(i).getId() == id){
+                number = mathNrChapters.get(i);
                 openChapters();
             }
         }
 
     }
 
-    private void openChapters() {
+    public void openChapters() {
 
         Intent intent = new Intent(this, Chapter.class);
-        //intent.putExtra("Length", 10);
+        intent.putExtra("NR_OF_CHAPTERS", number);
         startActivity(intent);
     }
 
@@ -131,7 +144,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
 
     }
-    private void setTextBtnPhys() {
+    public void setTextBtnPhys() {
 
         for(int i=0; i<physicsCourses.size();i++) {
             btnArray.get(i).setText(physicsCourses.get(i));

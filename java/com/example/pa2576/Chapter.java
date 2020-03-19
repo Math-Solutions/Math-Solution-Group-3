@@ -16,14 +16,15 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<Integer> chapterArray = new ArrayList<>();
 
-   // int nrOfChapters = Integer.parseInt(getIntent().getStringExtra("Length"));
+
+    int nrofChapters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
-
+        nrofChapters = getIntent().getIntExtra("NR_OF_CHAPTERS",0);
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -45,31 +46,37 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
 
 
         }
-
-
-        for (int i = 0; i < btnArray.size(); i++) {
+        for (int i = 0; i <nrofChapters ; i++) {
+            chapterArray.add(i);
+        }
+        setTextBtn();
+        for (int i = 0; i < chapterArray.size(); i++) {
             btnArray.get(i).setOnClickListener(this);
+
         }
 
-        setTextBtn();
+
     }
 
     public void setTextBtn() {
 
-        for (int i = 0; i <btnArray.size() ; i++) {
-            btnArray.get(i).setText(i);
+        for (int i = 0; i <chapterArray.size() ; i++) {
+            btnArray.get(i).setText("Chapter " +(i+1)+"");
+
         }
         for(int i=0; i<btnArray.size();i++) {
             if (btnArray.get(i).getText().equals("")) {
                 btnArray.get(i).setVisibility(View.GONE);
             }
         }
+
+
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
             default:
-               // checkPressedBtn(v.getId());
+                checkPressedBtn(v.getId());
                 break;
         }
     }
@@ -88,5 +95,8 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-}
+    }
+
+
+
 
