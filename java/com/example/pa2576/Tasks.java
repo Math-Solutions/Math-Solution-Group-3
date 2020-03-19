@@ -63,7 +63,7 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
     public void setTextBtn() {
 
         for (int i = 0; i <taskArray.size() ; i++) {
-            btnArray.get(i).setText(chapterNR +"." +(i+1)+"");
+            btnArray.get(i).setText("Task " + chapterNR +"." +(i+1)+"");
 
         }
         for(int i=0; i<btnArray.size();i++) {

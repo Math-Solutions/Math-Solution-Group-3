@@ -99,7 +99,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
         for (int i = 0; i < btnArray.size(); i++) {
             if (btnArray.get(i).getId() == id) {
                 Intent intent = new Intent(this, Tasks.class);
-                intent.putExtra("CHAPTER_NR", i);
+                intent.putExtra("CHAPTER_NR", (i+1));
                 intent.putExtra("NR_OF_TASKS_IN_CHAPTER",nrofTaskinChap.get(i));
                 startActivity(intent);
             }
