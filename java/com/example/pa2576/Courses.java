@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class Courses extends AppCompatActivity implements View.OnClickListener {
 
-
     ArrayList<Integer> idArray = new ArrayList<>();
 
     ArrayList<Button> btnArray = new ArrayList<>();
@@ -20,16 +19,19 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Integer> mathNrBooks= new ArrayList<>();
     ArrayList<String> physicsCourses = new ArrayList<>();
 
+
     //If the index is 0 the mathcourses will be displayed and if it is 1 the physichscourses will be displayed
     int index;
     String courseName;
     int bookIndex;
     int nrOfBooks;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
+
 
         index = getIntent().getIntExtra("COURSE",-1);
         idArray.add(R.id.button1);
@@ -46,6 +48,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         idArray.add(R.id.button12);
         idArray.add(R.id.button13);
 
+
         //Adds the buttons in the btnArray
         for (int id: idArray) {
             Button btn = findViewById(id);
@@ -59,6 +62,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         mathCourses.add("Statestik");
         mathCourses.add("Matte grundkurs");
 
+
         mathNrBooks.add(2);
         mathNrBooks.add(2);
         mathNrBooks.add(2);
@@ -71,11 +75,14 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
 
         //Add Courses to the physicsArray
+
         physicsCourses.add("physics1");
         physicsCourses.add("physics2");
         physicsCourses.add("physics3");
 
+
         //checks if the user pressed the Math or the physichs button in the homepage
+
         if(index == 0) {
             setTextBtnMath();
         }
@@ -83,8 +90,10 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
             setTextBtnPhys();
         }
 
+
         //Make the buttons clickable
         for (int i = 0; i < mathCourses.size(); i++) {
+
             btnArray.get(i).setOnClickListener( this);
         }
 
@@ -109,11 +118,13 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     public void checkPressedBtnPhys(int id) {
 
         for (int i = 0; i <physicsCourses.size() ; i++) {
+
             if(btnArray.get(i).getId() == id){
                 //Add Intens to physics chapters
             }
         }
     }
+
 
 
     public void checkPressedBtnMath(int id) {
@@ -139,9 +150,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         startActivity(intent);
     }
 
-
     public void setTextBtnMath(){
-
         for(int i=0; i<mathCourses.size();i++) {
             btnArray.get(i).setText(mathCourses.get(i));
         }
@@ -154,8 +163,8 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
 
     }
-    public void setTextBtnPhys() {
 
+    public void setTextBtnPhys() {
         for(int i=0; i<physicsCourses.size();i++) {
             btnArray.get(i).setText(physicsCourses.get(i));
         }
