@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class Tasks extends AppCompatActivity implements View.OnClickListener {
 
+
     ArrayList<Integer> idArray = new ArrayList<>();
     ArrayList<Button> btnArray = new ArrayList<>();
 
@@ -87,6 +88,7 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
 
 
 
+
     private void checkPressedBtn(int id) {
 
 
@@ -99,5 +101,4 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
 
 
 }
-
 
