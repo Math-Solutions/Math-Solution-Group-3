@@ -20,8 +20,10 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Integer> mathNrChapters = new ArrayList<>();
     ArrayList<String> physicsCourses = new ArrayList<>();
 
+    //If the index is 0 the mathcourses will be displayed and if it is 1 the physichscourses will be displayed
     int index =0;
-    int number=10;
+
+    int number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +44,12 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         idArray.add(R.id.button12);
         idArray.add(R.id.button13);
 
-
+        //Adds the buttons in the btnArray
         for (int id: idArray) {
             Button btn = findViewById(id);
             btnArray.add(btn);
         }
-
+        //Add Courses to the mathCoursesArray
         mathCourses.add("linear Algebra");
         mathCourses.add("Diskret");
         mathCourses.add("Analys 1");
@@ -56,6 +58,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         mathCourses.add("Statestik");
         mathCourses.add("Matte grundkurs");
 
+        //Adds how many chapters each course has in the MathNrChaptersArray
         mathNrChapters.add(12);
         mathNrChapters.add(3);
         mathNrChapters.add(7);
@@ -64,11 +67,12 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         mathNrChapters.add(11);
         mathNrChapters.add(10);
 
-
+        //Add Courses to the physicsArray
         physicsCourses.add("physics1");
         physicsCourses.add("physics2");
         physicsCourses.add("physics3");
 
+        //checks if the user pressed the Math or the physichs button in the homepage
         if(index == 0) {
             setTextBtnMath();
         }
@@ -76,6 +80,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
             setTextBtnPhys();
         }
 
+        //Make the buttons clickable
         for (int i = 0; i < mathCourses.size(); i++) {
             btnArray.get(i).setOnClickListener( this);
         }
@@ -84,7 +89,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-
+    //Set what happens when you click a button
     public void onClick(View v) {
         switch (v.getId()){
             default:
