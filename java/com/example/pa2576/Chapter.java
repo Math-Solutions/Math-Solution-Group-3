@@ -96,7 +96,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
     private void checkPressedBtn(int id) {
 
 
-        for (int i = 0; i < btnArray.size(); i++) {
+        for (int i = 0; i < chapterArray.size(); i++) {
             if (btnArray.get(i).getId() == id) {
                 Intent intent = new Intent(this, Tasks.class);
                 intent.putExtra("CHAPTER_NR", (i+1));

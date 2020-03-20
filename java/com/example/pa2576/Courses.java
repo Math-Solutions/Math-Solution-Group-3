@@ -46,8 +46,6 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         for (int id: idArray) {
             Button btn = findViewById(id);
             btnArray.add(btn);
-
-
         }
 
         mathCourses.add("linear Algebra");
@@ -102,7 +100,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
     public void checkPressedBtnPhys(int id) {
 
-        for (int i = 0; i <btnArray.size() ; i++) {
+        for (int i = 0; i <physicsCourses.size() ; i++) {
             if(btnArray.get(i).getId() == id){
                 //Add Intens to physics chapters
             }
@@ -113,7 +111,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     public void checkPressedBtnMath(int id) {
 
 
-        for (int i = 0; i <btnArray.size() ; i++) {
+        for (int i = 0; i <mathNrChapters.size() ; i++) {
             if(btnArray.get(i).getId() == id){
                 number = mathNrChapters.get(i);
                 openChapters();

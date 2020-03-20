@@ -89,7 +89,7 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
     private void checkPressedBtn(int id) {
 
 
-        for (int i = 0; i < btnArray.size(); i++) {
+        for (int i = 0; i < nrOfTasks; i++) {
             if (btnArray.get(i).getId() == id) {
                 //
             }
