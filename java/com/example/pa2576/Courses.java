@@ -17,20 +17,21 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Button> btnArray = new ArrayList<>();
 
     ArrayList<String> mathCourses = new ArrayList<>();
-    ArrayList<Integer> mathNrChapters = new ArrayList<>();
+    ArrayList<Integer> mathNrBooks= new ArrayList<>();
     ArrayList<String> physicsCourses = new ArrayList<>();
 
     //If the index is 0 the mathcourses will be displayed and if it is 1 the physichscourses will be displayed
     int index;
 
-    String bookName;
+    int bookIndex;
+    int nrOfBooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
-        index = getIntent().getIntExtra("COURSE",2);
+        index = getIntent().getIntExtra("COURSE",-1);
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -53,11 +54,18 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         //Add Courses to the mathCoursesArray
         mathCourses.add("linear Algebra");
         mathCourses.add("Diskret");
-        mathCourses.add("Analys 1");
-        mathCourses.add("Analys 2");
+        mathCourses.add("Analys");
         mathCourses.add("Fler dim");
         mathCourses.add("Statestik");
         mathCourses.add("Matte grundkurs");
+
+        mathNrBooks.add(2);
+        mathNrBooks.add(2);
+        mathNrBooks.add(2);
+        mathNrBooks.add(1);
+        mathNrBooks.add(1);
+        mathNrBooks.add(1);
+
 
         //Adds how many chapters each course has in the MathNrChaptersArray
 
@@ -111,9 +119,10 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     public void checkPressedBtnMath(int id) {
 
 
-        for (int i = 0; i <mathNrChapters.size() ; i++) {
+        for (int i = 0; i <mathCourses.size() ; i++) {
             if(btnArray.get(i).getId() == id){
-                index = i;
+                bookIndex = i;
+                nrOfBooks = mathNrBooks.get(i);
                 openBooks();
             }
         }
@@ -123,7 +132,8 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     public void openBooks() {
 
         Intent intent = new Intent(this, Books.class);
-        intent.putExtra("NAME_OF_BOOK", bookName);
+        intent.putExtra("NAME_OF_BOOK", bookIndex);
+        intent.putExtra("NR_OF_BOOKS", nrOfBooks);
         startActivity(intent);
     }
 

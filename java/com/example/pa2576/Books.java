@@ -1,5 +1,6 @@
 package com.example.pa2576;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,18 +13,12 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
 
     ArrayList<Integer> idArray = new ArrayList<>();
-
     ArrayList<Button> btnArray = new ArrayList<>();
+    ArrayList<Integer> chapterArrayOne = new ArrayList<>();
+    ArrayList<Integer> chapterArrayTwo = new ArrayList<>();
 
-    ArrayList<Integer> nrOfBooksArray = new ArrayList<>();
-    ArrayList<String> checkCourseArray = new ArrayList<>();
-
-    ArrayList<String> booknNameArray = new ArrayList<>();
-
-
-
-
-    String choosenBook;
+    int choosenBook;
+    int nrOfBooks;
 
     int number;
 
@@ -32,7 +27,8 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
-        choosenBook = getIntent().getStringExtra("NAME_OF_BOOK");
+        choosenBook = getIntent().getIntExtra("NAME_OF_BOOK",-1);
+        nrOfBooks = getIntent().getIntExtra("NAME_OF_BOOK",0);
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -52,64 +48,74 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
             Button btn = findViewById(id);
             btnArray.add(btn);
         }
-        //Add Courses to the checkCourseArray
-        checkCourseArray.add("linear Algebra");
-        checkCourseArray.add("Diskret");
-        checkCourseArray.add("Analys 1");
-        checkCourseArray.add("Analys 2");
-        checkCourseArray.add("Fler dim");
-        checkCourseArray.add("Statestik");
-        checkCourseArray.add("Matte grundkurs");
-        checkCourseArray.add("physics1");
-        checkCourseArray.add("physics2");
-        checkCourseArray.add("physics3");
+
+
+
+        chapterArrayOne.add(12);
+        chapterArrayOne.add(10);
+        chapterArrayOne.add(5);
+        chapterArrayOne.add(13);
+        chapterArrayOne.add(9);
+        chapterArrayOne.add(2);
+
+
+        chapterArrayTwo.add(11);
+        chapterArrayTwo.add(9);
+        chapterArrayTwo.add(8);
 
 
 
 
-        checkbook();
 
+
+       checkbook();
+       setTextBtnBooks();
 
         //Make the buttons clickable
-        for (int i = 0; i < checkCourseArray.size(); i++) {
+        for (int i = 0; i < choosenBook+1; i++) {
             btnArray.get(i).setOnClickListener( this);
         }
 
 
+
+
     }
+    //Set what happens when you click a button
+    public void onClick(View v) {
+        switch (v.getId()){
+            default:
+               checkPressedBtnBook(v.getId());
+                break;
+        }
+    }
+
 
     private void checkbook() {
 
-        for (int i = 0; i <checkCourseArray.size() ; i++) {
+        for (int i = 0; i <choosenBook+1 ; i++) {
             switch (choosenBook){
-                case "linear Algebra":
+                case 0:
                     btnArray.get(0).setText("Linjer bok 1");
-                    btnArray.get(0).setText("Linjer bok 2");
-
-
+                    btnArray.get(1).setText("Linjer bok 2");
                     break;
-                case "Diskret":
+                case 1:
                     btnArray.get(0).setText("Diskret bok 1");
-                    btnArray.get(0).setText("Diskret bok 2");
-
-
-                    break; case "Analys 1":
-                    btnArray.get(0).setText("Analys bok 1");
-                    btnArray.get(0).setText("Analys bok 2");
-
-
+                    btnArray.get(1).setText("Diskret bok 2");
                     break;
-                case "Analys 2":
+
+                    case 2:
                     btnArray.get(0).setText("Analys bok 1");
-                    btnArray.get(0).setText("Analys bok 2");
-
-
+                    btnArray.get(1).setText("Analys bok 2");
                     break;
-                case "Fler dim":
+                case 3:
                     btnArray.get(0).setText("Fler dim bok 1");
-                    btnArray.get(0).setText("Fler dim bok 2");
-
-
+                    break;
+                case 4:
+                    btnArray.get(0).setText("Statistik bok 1");
+                    break;
+                case 5:
+                    btnArray.get(0).setText("Matte grundcourse bok 1");
+                    break;
 
                 default:
                     throw new IllegalStateException("Unexpected value: " + choosenBook);
@@ -119,73 +125,48 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    //Set what happens when you click a button
-    public void onClick(View v) {
-        switch (v.getId()){
-            default:
+    public void setTextBtnBooks(){
 
-                break;
+
+        for(int i=0; i<btnArray.size();i++) {
+            if(btnArray.get(i).getText().equals("")){
+                btnArray.get(i).setVisibility(View.GONE);
+            }
+
         }
-    }
-/*
-    public void checkPressedBtnPhys(int id) {
 
-        for (int i = 0; i <physicsCourses.size() ; i++) {
+
+    }
+    public void checkPressedBtnBook(int id) {
+
+
+        for (int i = 0; i <nrOfBooks ; i++) {
             if(btnArray.get(i).getId() == id){
-                //Add Intens to physics chapters
+                if(i==0){
+                    for (int j = 0; j <choosenBook+1 ; j++) {
+                        if(j == choosenBook) {
+                            number = chapterArrayOne.get(j);
+                        }
+                    }
+                    if(i==1){
+                        for (int j = 0; j <choosenBook+1 ; j++) {
+                            if(j == choosenBook) {
+                                number = chapterArrayTwo.get(j);
+                            }
+                        }
+
+                    }
+                }
             }
         }
-    }
-
-
-    public void checkPressedBtnMath(int id) {
-
-
-        for (int i = 0; i <mathNrChapters.size() ; i++) {
-            if(btnArray.get(i).getId() == id){
-                number = mathNrChapters.get(i);
-                openChapters();
-            }
-        }
-
+        openChapters();
     }
 
     public void openChapters() {
 
         Intent intent = new Intent(this, Chapter.class);
-        intent.putExtra("NR_OF_CHAPTERS", number);
+        intent.putExtra("NR_OF_CHAPTERS", 4);
         startActivity(intent);
     }
-
-
-    public void setTextBtnMath(){
-
-        for(int i=0; i<mathCourses.size();i++) {
-            btnArray.get(i).setText(mathCourses.get(i));
-        }
-        for(int i=0; i<btnArray.size();i++) {
-            if(btnArray.get(i).getText().equals("")){
-                btnArray.get(i).setVisibility(View.GONE);
-            }
-
-        }
-
-
-    }
-    public void setTextBtnPhys() {
-
-        for(int i=0; i<physicsCourses.size();i++) {
-            btnArray.get(i).setText(physicsCourses.get(i));
-        }
-        for(int i=0; i<btnArray.size();i++) {
-            if(btnArray.get(i).getText().equals("")){
-                btnArray.get(i).setVisibility(View.GONE);
-            }
-
-        }
-    }
-
-
- */
 
 }

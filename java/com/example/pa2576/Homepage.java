@@ -19,53 +19,37 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-        buttonHandler();
-
-
-}
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    public void buttonHandler() {
         math = (Button) findViewById(R.id.mathBtn);
         physics = (Button) findViewById(R.id.physicsBtn);
         info = (Button) findViewById(R.id.infoBtn);
         profile = (Button) findViewById(R.id.profileBtn);
 
+        math.setOnClickListener( this);
+        physics.setOnClickListener( this);
+        info.setOnClickListener( this);
+        profile.setOnClickListener( this);
+}
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProfile();
-            }
-        });
-
-        math.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                number=0;
+    //Set what happens when you click a button
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.mathBtn:
+                number = 0;
                 openCourses();
-            }});
+                break;
 
-        physics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                number=1;
+            case R.id.physicsBtn:
+                number = 1;
                 openCourses();
-            }});
-
-        info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.infoBtn:
                 openInfo();
-            }
-        });
-
-
-    };
+                break;
+            case R.id.profileBtn:
+                openProfile();
+                break;
+        }
+    }
 
     public void openProfile() {
         Intent profile = new Intent(this, ProfilePage.class);
