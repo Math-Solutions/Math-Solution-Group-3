@@ -38,9 +38,9 @@
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.signInBtn:
-               // if(checkSignIN()) {
+                if(checkSignIN()) {
                     openHomePage();
-                //}
+                }
                 break;
             case R.id.createAccountBtn:
                 openCreateAccount();
@@ -73,7 +73,6 @@
         for (String[] strings : checkLoginArray) {
 
             if ((usernameLogin.getText().toString()).equals(strings[0]) && password.getText().toString().equals(strings[1])) {
-                incorrectLogin.setText("Det funka");
                 return true;
 
             }
