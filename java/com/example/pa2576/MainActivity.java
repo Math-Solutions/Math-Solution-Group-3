@@ -1,15 +1,15 @@
-package com.example.pa2576;
+    package com.example.pa2576;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+    import android.content.Intent;
+    import android.os.Bundle;
+    import android.view.View;
+    import android.widget.Button;
+    import android.widget.EditText;
+    import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+    import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText usernameLogin;
     EditText password;
@@ -38,25 +38,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.signInBtn:
-                if(checkSignIN()) {
-                    openCourse();
-                }
+               // if(checkSignIN()) {
+                    openHomePage();
+                //}
                 break;
             case R.id.createAccountBtn:
                 openCreateAccount();
                 break;
             case R.id.forgotbtn:
-                openCourse();
+                openForgot();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
     }
 
-    private void openCourse() {
-        Intent intent = new Intent(this, Courses.class);
-        startActivity(intent);
-    }
 
     public boolean checkSignIN() {
 
@@ -90,15 +86,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void openCreateAccount() {
         Intent intent = new Intent(this, CreateAccount.class);
         startActivity(intent);
-        }
-       /* public void openHomePage() {
-            Intent intent = new Intent(this, HomePageTest.class);
-            startActivity(intent);
-        }
+    }
+    public void openHomePage() {
+        Intent intent = new Intent(this, Homepage.class);
+        startActivity(intent);
+    }
 
-        public void openForgot() {
-            Intent intent = new Intent(this, Forgot.class);
-            startActivity(intent);
-        }*/
+    public void openForgot() {
+        Intent intent = new Intent(this, Forgot.class);
+        startActivity(intent);
+    }
 
-}
+    }

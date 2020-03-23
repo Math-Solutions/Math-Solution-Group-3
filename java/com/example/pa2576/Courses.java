@@ -21,15 +21,16 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     ArrayList<String> physicsCourses = new ArrayList<>();
 
     //If the index is 0 the mathcourses will be displayed and if it is 1 the physichscourses will be displayed
-    int index =0;
+    int index;
 
-    int number;
+    String bookName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
+        index = getIntent().getIntExtra("COURSE",2);
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -59,13 +60,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         mathCourses.add("Matte grundkurs");
 
         //Adds how many chapters each course has in the MathNrChaptersArray
-        mathNrChapters.add(12);
-        mathNrChapters.add(3);
-        mathNrChapters.add(7);
-        mathNrChapters.add(13);
-        mathNrChapters.add(6);
-        mathNrChapters.add(11);
-        mathNrChapters.add(10);
+
 
         //Add Courses to the physicsArray
         physicsCourses.add("physics1");
@@ -118,17 +113,17 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
         for (int i = 0; i <mathNrChapters.size() ; i++) {
             if(btnArray.get(i).getId() == id){
-                number = mathNrChapters.get(i);
-                openChapters();
+                index = i;
+                openBooks();
             }
         }
 
     }
 
-    public void openChapters() {
+    public void openBooks() {
 
-        Intent intent = new Intent(this, Chapter.class);
-        intent.putExtra("NR_OF_CHAPTERS", number);
+        Intent intent = new Intent(this, Books.class);
+        intent.putExtra("NAME_OF_BOOK", bookName);
         startActivity(intent);
     }
 

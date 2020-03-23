@@ -21,6 +21,13 @@
         <activity android:name=".Chapter"
             ></activity>
         <activity android:name=".Tasks"/>
+        <activity android:name=".Homepage" />
+        <activity android:name=".Forgot" />
+        <activity android:name=".ChangeProfilePic" />
+        <activity android:name=".ChangeProfile" />
+        <activity android:name=".MyRates" />
+        <activity android:name=".MyUploads" />
+        <activity android:name=".ProfilePage" />
     </application>
 
 </manifest>
