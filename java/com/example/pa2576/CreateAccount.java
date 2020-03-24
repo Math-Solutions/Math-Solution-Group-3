@@ -134,7 +134,7 @@ public class CreateAccount extends AppCompatActivity {
             notFilled.setText("Username already exists");
             return false;
         }
-        else if(!checkPassword()){
+        else if(checkPassword()){
             setcolorPassword(red);
             notFilled.setText("The password does not match the criteria or the two passwords do not match");
 

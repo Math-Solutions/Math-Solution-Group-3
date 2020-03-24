@@ -149,8 +149,8 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
                     }
                 }
 
-                if(btnArray.get(1).getId() == id) {
-                    for (int j = 0; j < choosenBook + 1; j++) {
+            if(btnArray.get(1).getId() == id) {
+                    for (int j = 0; j < choosenBook + 2; j++) {
                         if (j == choosenBook) {
                                 number = chapterArrayTwo.get(j);
                         }
