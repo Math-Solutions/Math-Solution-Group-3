@@ -20,7 +20,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
     int choosenBook;
     int nrOfBooks;
 
-    int number;
+    int number=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,32 +140,30 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
     public void checkPressedBtnBook(int id) {
 
 
-        for (int i = 0; i <nrOfBooks ; i++) {
-            if(btnArray.get(i).getId() == id){
-                if(i==0){
-                    for (int j = 0; j <choosenBook+1 ; j++) {
-                        if(j == choosenBook) {
+
+            if(btnArray.get(0).getId() == id) {
+                    for (int j = 0; j < choosenBook + 1; j++) {
+                        if (j == choosenBook) {
                             number = chapterArrayOne.get(j);
                         }
                     }
-                    if(i==1){
-                        for (int j = 0; j <choosenBook+1 ; j++) {
-                            if(j == choosenBook) {
-                                number = chapterArrayTwo.get(j);
-                            }
-                        }
-
-                    }
                 }
-            }
-        }
-        openChapters();
+
+                if(btnArray.get(1).getId() == id) {
+                    for (int j = 0; j < choosenBook + 1; j++) {
+                        if (j == choosenBook) {
+                                number = chapterArrayTwo.get(j);
+                        }
+                    }
+
+                }
+                openChapters();
     }
 
     public void openChapters() {
 
         Intent intent = new Intent(this, Chapter.class);
-        intent.putExtra("NR_OF_CHAPTERS", 4);
+        intent.putExtra("NR_OF_CHAPTERS", number);
         startActivity(intent);
     }
 

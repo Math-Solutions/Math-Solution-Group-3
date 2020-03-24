@@ -141,8 +141,8 @@ public class CreateAccount extends AppCompatActivity {
             return false;
         }
         else if(!checkEmail()){
-            setcolorPassword(red);
-            notFilled.setText("The password does not match the criteria or the two passwords do not match");
+          //  setcolorPassword(red);
+           // notFilled.setText("The password does not match the criteria or the two passwords do not match");
 
             return false;
         }
@@ -172,7 +172,7 @@ public class CreateAccount extends AppCompatActivity {
 
 
 
-        return false;
+        return true;
     }
 
     private void setColorText(String color) {
