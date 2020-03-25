@@ -30,15 +30,20 @@
         signINBtn.setOnClickListener(this);
         createAccount.setOnClickListener(this);
         forgotPass.setOnClickListener(this);
-
+        searchMetod();
 
     }
 
-    @Override
+        private void searchMetod() {
+
+        }
+
+        @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.signInBtn:
-                if(checkSignIN()) {
+                //don´t forget to take away the ! bellow
+                if(!checkSignIN()) {
                     openHomePage();
                 }
                 break;
@@ -97,3 +102,4 @@
     }
 
     }
+

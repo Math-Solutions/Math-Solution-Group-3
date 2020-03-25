@@ -17,18 +17,21 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Integer> chapterArrayOne = new ArrayList<>();
     ArrayList<Integer> chapterArrayTwo = new ArrayList<>();
 
-    int choosenBook;
+    int chosenBook;
     int nrOfBooks;
-
+    String bookName;
     int number=1;
+    String courseName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
-        choosenBook = getIntent().getIntExtra("NAME_OF_BOOK",-1);
-        nrOfBooks = getIntent().getIntExtra("NAME_OF_BOOK",0);
+        chosenBook = getIntent().getIntExtra("NAME_OF_BOOK",-1);
+        nrOfBooks = getIntent().getIntExtra("NR_OF_BOOK",0);
+        courseName = getIntent().getStringExtra("CHOSEN_COURSE");
+        setTitle(courseName);
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -72,7 +75,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
        setTextBtnBooks();
 
         //Make the buttons clickable
-        for (int i = 0; i < choosenBook+1; i++) {
+        for (int i = 0; i < chosenBook+1; i++) {
             btnArray.get(i).setOnClickListener( this);
         }
 
@@ -92,8 +95,8 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
     private void checkbook() {
 
-        for (int i = 0; i <choosenBook+1 ; i++) {
-            switch (choosenBook){
+        for (int i = 0; i <chosenBook+1 ; i++) {
+            switch (chosenBook){
                 case 0:
                     btnArray.get(0).setText("Linjer bok 1");
                     btnArray.get(1).setText("Linjer bok 2");
@@ -118,7 +121,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
                     break;
 
                 default:
-                    throw new IllegalStateException("Unexpected value: " + choosenBook);
+                    throw new IllegalStateException("Unexpected value: " + chosenBook);
             }
 
         }
@@ -142,17 +145,20 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
 
             if(btnArray.get(0).getId() == id) {
-                    for (int j = 0; j < choosenBook + 1; j++) {
-                        if (j == choosenBook) {
+                    for (int j = 0; j < chosenBook + 1; j++) {
+                        if (j == chosenBook) {
                             number = chapterArrayOne.get(j);
+                            bookName = (btnArray.get(0).getText().toString());
                         }
                     }
                 }
 
             if(btnArray.get(1).getId() == id) {
-                    for (int j = 0; j < choosenBook + 2; j++) {
-                        if (j == choosenBook) {
-                                number = chapterArrayTwo.get(j);
+                    for (int j = 0; j < chosenBook + 2; j++) {
+                        if (j == chosenBook) {
+                            number = chapterArrayTwo.get(j);
+                            bookName = (btnArray.get(1).getText().toString());
+
                         }
                     }
 
@@ -164,6 +170,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
         Intent intent = new Intent(this, Chapter.class);
         intent.putExtra("NR_OF_CHAPTERS", number);
+        intent.putExtra("CHOSEN_BOOK", courseName + " -> " + bookName);
         startActivity(intent);
     }
 

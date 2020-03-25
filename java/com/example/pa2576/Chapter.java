@@ -27,6 +27,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_courses);
 
         nrofChapters = getIntent().getIntExtra("NR_OF_CHAPTERS",0);
+        setTitle(getIntent().getStringExtra("CHOSEN_BOOK"));
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -101,6 +102,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
                 Intent intent = new Intent(this, Tasks.class);
                 intent.putExtra("CHAPTER_NR", (i+1));
                 intent.putExtra("NR_OF_TASKS_IN_CHAPTER",nrofTaskinChap.get(i));
+                intent.putExtra("CHOSEN_BOOK",getIntent().getStringExtra("CHOSEN_BOOK") + " -> Cap " +(i+1) + "");
                 startActivity(intent);
             }
         }

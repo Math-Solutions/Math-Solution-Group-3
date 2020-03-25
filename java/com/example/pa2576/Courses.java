@@ -22,7 +22,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
     //If the index is 0 the mathcourses will be displayed and if it is 1 the physichscourses will be displayed
     int index;
-
+    String courseName;
     int bookIndex;
     int nrOfBooks;
 
@@ -123,6 +123,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
             if(btnArray.get(i).getId() == id){
                 bookIndex = i;
                 nrOfBooks = mathNrBooks.get(i);
+                courseName = mathCourses.get(i).toString();
                 openBooks();
             }
         }
@@ -134,6 +135,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         Intent intent = new Intent(this, Books.class);
         intent.putExtra("NAME_OF_BOOK", bookIndex);
         intent.putExtra("NR_OF_BOOKS", nrOfBooks);
+        intent.putExtra("CHOSEN_COURSE", courseName);
         startActivity(intent);
     }
 

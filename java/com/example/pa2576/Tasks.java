@@ -27,6 +27,7 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
 
         chapterNR = getIntent().getIntExtra("CHAPTER_NR",0);
         nrOfTasks = getIntent().getIntExtra("NR_OF_TASKS_IN_CHAPTER",0);
+        setTitle(getIntent().getStringExtra("CHOSEN_BOOK"));
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
