@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Solutions">
+
+    <TextView
+        android:id="@+id/teacherSolTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teachers Solutions"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/teacherSol_1Btn"
+        android:layout_width=""
+        android:layout_height="wrap_content"
+        android:layout_below="@id/teacherSolTextView"
+        android:layout_marginRight="40dp"
+        android:layout_weight="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/votesteachersol_1Btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teacherSolTextView"
+        tools:text="Solution 1" />
+
+    <TextView
+        android:id="@+id/votesteachersol_1Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+
+        android:layout_marginRight="4dp"
+        android:layout_toRightOf="@id/teacherSol_1Btn"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="39dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

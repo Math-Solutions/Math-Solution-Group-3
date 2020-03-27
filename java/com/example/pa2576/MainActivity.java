@@ -9,10 +9,14 @@
 
     import androidx.appcompat.app.AppCompatActivity;
 
+    import java.util.ArrayList;
+
     public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText usernameLogin;
     EditText password;
+
+    ArrayList<String> searchTagsList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +30,22 @@
         Button createAccount = findViewById(R.id.createAccountBtn);
         Button forgotPass = findViewById(R.id.forgotbtn);
 
+        searchTagsList.add("linear Algebra");
+        searchTagsList.add("Diskret");
+        searchTagsList.add("Analys");
+        searchTagsList.add("Fler dim");
+        searchTagsList.add("Statestik");
+        searchTagsList.add("Matte grundkurs");
+
 
         signINBtn.setOnClickListener(this);
         createAccount.setOnClickListener(this);
         forgotPass.setOnClickListener(this);
-        searchMetod();
+        searchMethod();
 
     }
 
-        private void searchMetod() {
+        private void searchMethod() {
 
         }
 
