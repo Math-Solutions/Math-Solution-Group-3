@@ -126,5 +126,7 @@
     <string name="h_gskoleingenj_r_i_maskinteknik">Högskoleingenjör i maskinteknik</string>
     <string name="spelprogrammering">Spelprogrammering</string>
     <string name="other_education">Other Education</string>
+    <string name="textview">TextView</string>
+    <string name="_100">100</string>
 </resources>
 

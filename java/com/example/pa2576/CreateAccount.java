@@ -1,5 +1,6 @@
 package com.example.pa2576;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,10 +9,20 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -77,7 +88,6 @@ public class CreateAccount extends AppCompatActivity {
         //Array for the educations checkboxes
 
 
-
         educationArray.add(civAI);
         educationArray.add(civSak);
         educationArray.add(hogSak);
@@ -94,9 +104,10 @@ public class CreateAccount extends AppCompatActivity {
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if( checkIfFilled()){
-                   openSignInPage();
-               }
+                if (checkIfFilled()) {
+                    createNewAccount(firstName.getText().toString(),lastName.getText().toString(),eMail.getText().toString(),"industriell ekonomi",createUsername.getText().toString(),createPassword.getText().toString());
+                    //openSignInPage();
+                }
 
 
             }
@@ -105,10 +116,9 @@ public class CreateAccount extends AppCompatActivity {
         });
 
 
-
     }
 
-    public void openSignInPage(){
+    public void openSignInPage() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
@@ -119,35 +129,24 @@ public class CreateAccount extends AppCompatActivity {
 
         String red = "#ba160c";
 
-        if (!checkBoxGDPR.isChecked() || !checkBoxRules.isChecked() || createUsername.getText().toString().isEmpty() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty()){
+        if (!checkBoxGDPR.isChecked() || !checkBoxRules.isChecked() || createUsername.getText().toString().isEmpty() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty()) {
             setColorText(red);
             notFilled.setText("Please fill in all the things that are red");
-        return false;
-        }
-        else if(!checkEducation()){
+            return false;
+        /*} else if (!checkEducation()) {
             chooseEducation.setText("choose ONE Education");
             chooseEducation.setTextColor(Color.parseColor(red));
             return false;
-        }
-        else if(checkUsername()){
+        } else if (checkUsername()) {
             createUsername.setTextColor(Color.parseColor(red));
             notFilled.setText("Username already exists");
-            return false;
-        }
-        else if(!checkPassword()){
+            return false;*/
+        } else if (!checkPassword()) {
             setcolorPassword(red);
             notFilled.setText("The password does not match the criteria or the two passwords do not match");
 
             return false;
-        }
-        else if(!checkEmail()){
-          //  setcolorPassword(red);
-           // notFilled.setText("The password does not match the criteria or the two passwords do not match");
-
-            return false;
-        }
-
-        else {
+        } else {
             return true;
         }
 
@@ -156,20 +155,18 @@ public class CreateAccount extends AppCompatActivity {
     private boolean checkEducation() {
         int index = 0;
 
-        for (CheckBox i : educationArray){
-            if(i.isChecked()){
+        for (CheckBox i : educationArray) {
+            if (i.isChecked()) {
                 index++;
             }
         }
-        if(index==1){
+        if (index == 1) {
             return true;
-        }
-        else
-        return false;
+        } else
+            return false;
     }
 
     private boolean checkEmail() {
-
 
 
         return true;
@@ -186,30 +183,29 @@ public class CreateAccount extends AppCompatActivity {
 
     }
 
-    private void setcolorPassword(String color){
+    private void setcolorPassword(String color) {
 
         passwordText.setTextColor(Color.parseColor(color));
         passwordText2.setTextColor(Color.parseColor(color));
     }
 
 
-
     public boolean checkPassword() {
 
 
-        if(createPassword.getText().toString().length()>=8){
+        if (createPassword.getText().toString().length() >= 8) {
             boolean checknumber = false;
             boolean checkCapLetter = false;
-            for(int i=0; i<createPassword.getText().toString().length();i++){
+            for (int i = 0; i < createPassword.getText().toString().length(); i++) {
 
 
-                if(Character.isDigit(createPassword.getText().toString().charAt(i))){
+                if (Character.isDigit(createPassword.getText().toString().charAt(i))) {
                     checknumber = true;
                 }
-                if(Character.isUpperCase(createPassword.getText().toString().charAt(i))){
+                if (Character.isUpperCase(createPassword.getText().toString().charAt(i))) {
                     checkCapLetter = true;
                 }
-                if(checknumber && checkCapLetter){
+                if (checknumber && checkCapLetter) {
                     return true;
                 }
 
@@ -237,6 +233,55 @@ public class CreateAccount extends AppCompatActivity {
         return false;
     }
 
+    public void createNewAccount(final String firstName, final String lastName, final String email, final String education, final String username, final String password) {
+        final ProgressDialog progressDialog = new ProgressDialog(CreateAccount.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setTitle("CreateAccount");
+        progressDialog.show();
+        String url = "http://192.168.1.112/createAccount.php";
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.equals("Successfully Created Account")) {
+                    progressDialog.dismiss();
+                    Toast.makeText(CreateAccount.this, response, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(CreateAccount.this, MainActivity.class));
+                    //finish();
+
+                }
+                else{
+                    progressDialog.dismiss();
+                    Toast.makeText(CreateAccount.this, response, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(CreateAccount.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> param = new HashMap<>();
+                param.put("firstname",firstName);
+                param.put("lastname",lastName);
+                param.put("email",email);
+                param.put("education",education);
+                param.put("username",username);
+                param.put("password",password);
 
 
+                return param;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MySingleton.getmInstance(CreateAccount.this).addToRequestQueue(request);
+    }
 }
+
+
+
