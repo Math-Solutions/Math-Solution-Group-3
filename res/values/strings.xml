@@ -6,6 +6,7 @@
     <string name="sign_in">Sign in</string>
     <string name="create_account">Create Account</string>
     <string name="forgot_username_password">Forgot Username/Password</string>
+    <string name="prefLoginState">loginstate</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

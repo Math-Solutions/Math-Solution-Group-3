@@ -131,7 +131,7 @@ public class CreateAccount extends AppCompatActivity {
 
         if (!checkBoxGDPR.isChecked() || !checkBoxRules.isChecked() || createUsername.getText().toString().isEmpty() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty()) {
             setColorText(red);
-            notFilled.setText("Please fill in all the things that are red");
+            Toast.makeText(CreateAccount.this, "Please fill in all the things that are red", Toast.LENGTH_SHORT).show();
             return false;
         /*} else if (!checkEducation()) {
             chooseEducation.setText("choose ONE Education");
@@ -143,7 +143,8 @@ public class CreateAccount extends AppCompatActivity {
             return false;*/
         } else if (!checkPassword()) {
             setcolorPassword(red);
-            notFilled.setText("The password does not match the criteria or the two passwords do not match");
+            Toast.makeText(CreateAccount.this, "The password does not match the criteria or the two passwords do not match", Toast.LENGTH_SHORT).show();
+
 
             return false;
         } else {
@@ -214,25 +215,6 @@ public class CreateAccount extends AppCompatActivity {
         return false;
     }
 
-    private boolean checkUsername() {
-
-        String[] checkLoginArray = new String[4];
-
-        checkLoginArray[0] = "Emil123";
-        checkLoginArray[1] = "Hedvig123";
-        checkLoginArray[2] = "Victoria123";
-        checkLoginArray[3] = "Malin123";
-
-        for (String s : checkLoginArray) {
-
-            if ((createUsername.getText().toString()).equals(s)) {
-                return true;
-
-            }
-        }
-        return false;
-    }
-
     public void createNewAccount(final String firstName, final String lastName, final String email, final String education, final String username, final String password) {
         final ProgressDialog progressDialog = new ProgressDialog(CreateAccount.this);
         progressDialog.setCancelable(false);
@@ -247,8 +229,8 @@ public class CreateAccount extends AppCompatActivity {
                 if (response.equals("Successfully Created Account")) {
                     progressDialog.dismiss();
                     Toast.makeText(CreateAccount.this, response, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(CreateAccount.this, MainActivity.class));
-                    //finish();
+                    startActivity(new Intent(CreateAccount.this, Homepage.class));
+
 
                 }
                 else{

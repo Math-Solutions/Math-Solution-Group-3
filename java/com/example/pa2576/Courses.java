@@ -1,13 +1,25 @@
 package com.example.pa2576;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.CornerPathEffect;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Courses extends AppCompatActivity implements View.OnClickListener {
 
@@ -167,5 +179,54 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    private void getCourses(ArrayList<String> courses){
+        final ProgressDialog progressDialog = new ProgressDialog(Courses.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(false);
+        progressDialog.setTitle("Courses");
+        progressDialog.show();
+        String url = "http://192.168.1.112/courses.php";
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.equals("Successfully Created Account")) {
+                    progressDialog.dismiss();
+                    Toast.makeText(Courses.this, response, Toast.LENGTH_SHORT).show();
+
+
+
+                }
+                else{
+                    progressDialog.dismiss();
+                    Toast.makeText(Courses.this, response, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(Courses.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> param = new HashMap<>();
+                param.put("firstname",firstName);
+                param.put("lastname",lastName);
+                param.put("email",email);
+                param.put("education",education);
+                param.put("username",username);
+                param.put("password",password);
+
+
+                return param;
+
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MySingleton.getmInstance(Courses.this).addToRequestQueue(request);
+    }
+    }
 
 }
