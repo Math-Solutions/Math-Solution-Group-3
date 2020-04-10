@@ -27,7 +27,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
-
+        //Retrieve variables from other classes
         chosenBook = getIntent().getIntExtra("NAME_OF_BOOK",-1);
         nrOfBooks = getIntent().getIntExtra("NR_OF_BOOK",0);
         courseName = getIntent().getStringExtra("CHOSEN_COURSE");
@@ -140,6 +140,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
 
     }
+    //checks which button that is pressed
     public void checkPressedBtnBook(int id) {
 
 
@@ -165,7 +166,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
                 }
                 openChapters();
     }
-
+    //opens the chapters class and sends som variables into that class
     public void openChapters() {
 
         Intent intent = new Intent(this, Chapter.class);

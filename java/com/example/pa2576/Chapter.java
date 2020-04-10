@@ -42,17 +42,19 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
         idArray.add(R.id.button12);
         idArray.add(R.id.button13);
 
-
+        //fill the array with buttons
         for (int id : idArray) {
             Button btn = findViewById(id);
             btnArray.add(btn);
 
 
         }
+        //fills the array with the nr om the chapters it has
         for (int i = 0; i <nrofChapters ; i++) {
             chapterArray.add(i);
         }
         setTextBtn();
+        //makes all the buttons clickable
         for (int i = 0; i < chapterArray.size(); i++) {
             btnArray.get(i).setOnClickListener(this);
 
@@ -67,7 +69,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
         nrofTaskinChap.add(10);
 
     }
-
+    //sets the texts of all the buttons
     public void setTextBtn() {
 
         for (int i = 0; i <chapterArray.size() ; i++) {
@@ -93,7 +95,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
 
 
 
-
+    //checks which button that is pressed and opens task.class and send som variables to the task class
     private void checkPressedBtn(int id) {
 
 

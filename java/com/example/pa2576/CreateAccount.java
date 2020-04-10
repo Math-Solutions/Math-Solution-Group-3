@@ -101,12 +101,13 @@ public class CreateAccount extends AppCompatActivity {
 
         createAccount = findViewById(R.id.createAccount);
 
+        //when the create account button is pressed the system checks that all the requirements in checkIfFilled() is true meaning that every criteria for the account to be created is forfilled
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkIfFilled()) {
                     createNewAccount(firstName.getText().toString(),lastName.getText().toString(),eMail.getText().toString(),"industriell ekonomi",createUsername.getText().toString(),createPassword.getText().toString());
-                    //openSignInPage();
+
                 }
 
 
@@ -118,13 +119,9 @@ public class CreateAccount extends AppCompatActivity {
 
     }
 
-    public void openSignInPage() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-
-    }
 
 
+    // checks that every criteria for the account to be created is forfilled
     public boolean checkIfFilled() {
 
         String red = "#ba160c";
@@ -172,7 +169,7 @@ public class CreateAccount extends AppCompatActivity {
 
         return true;
     }
-
+    //Sets the color of the textview and so on
     private void setColorText(String color) {
 
         firstName.setHintTextColor(Color.parseColor(color));
@@ -183,14 +180,14 @@ public class CreateAccount extends AppCompatActivity {
         checkBoxRules.setTextColor(Color.parseColor(color));
 
     }
-
+    //sets color to the password
     private void setcolorPassword(String color) {
 
         passwordText.setTextColor(Color.parseColor(color));
         passwordText2.setTextColor(Color.parseColor(color));
     }
 
-
+    //checks if the password is 8 char long and if it contains atleast on capital letter and one digit
     public boolean checkPassword() {
 
 
@@ -214,26 +211,26 @@ public class CreateAccount extends AppCompatActivity {
         }
         return false;
     }
-
-    public void createNewAccount(final String firstName, final String lastName, final String email, final String education, final String username, final String password) {
+    //Here we insert the values the user information into the database through a php code
+    private void createNewAccount(final String firstName, final String lastName, final String email, final String education, final String username, final String password) {
         final ProgressDialog progressDialog = new ProgressDialog(CreateAccount.this);
         progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(false);
-        progressDialog.setTitle("CreateAccount");
+        progressDialog.setTitle("Creating the Account");
         progressDialog.show();
         String url = "http://192.168.1.112/createAccount.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
+            //Here the method checks if the response from the php code is "Successfully created an account" that it should create
             public void onResponse(String response) {
-                if (response.equals("Successfully Created Account")) {
+                if (response.equals("Successfully created an account")) {
                     progressDialog.dismiss();
                     Toast.makeText(CreateAccount.this, response, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(CreateAccount.this, Homepage.class));
-
-
+                    startActivity(new Intent(CreateAccount.this, MainActivity.class));
                 }
                 else{
+                    //displays the respone that was received from the php code
                     progressDialog.dismiss();
                     Toast.makeText(CreateAccount.this, response, Toast.LENGTH_SHORT).show();
                 }
@@ -246,6 +243,7 @@ public class CreateAccount extends AppCompatActivity {
             }
         }
         ) {
+            //here is the variables that goes into the php code
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> param = new HashMap<>();
                 param.put("firstname",firstName);

@@ -13,7 +13,7 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener 
     Button math, physics, info, profile;
     TextView welcome, searchinfo;
     SearchView search;
-    int number=2;
+    String subject=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +34,12 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mathBtn:
-                number = 0;
+                subject = "Math";
                 openCourses();
                 break;
 
             case R.id.physicsBtn:
-                number = 1;
+                subject = "Physics";
                 openCourses();
                 break;
             case R.id.infoBtn:
@@ -58,7 +58,7 @@ public class Homepage extends AppCompatActivity implements View.OnClickListener 
 
     public void openCourses(){
         Intent course = new Intent(this, Courses.class);
-        course.putExtra("COURSE",number);
+        course.putExtra("SUBJECT",subject);
         startActivity(course);
     }
     public void openInfo() {

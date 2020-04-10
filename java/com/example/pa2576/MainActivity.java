@@ -116,7 +116,7 @@
         final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(false);
-        progressDialog.setTitle("MainActivity");
+        progressDialog.setTitle("Welcome");
         progressDialog.show();
         String url = "http://192.168.1.112/login.php";
 

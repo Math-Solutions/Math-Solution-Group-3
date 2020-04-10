@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Courses extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,13 +38,14 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     String courseName;
     int bookIndex;
     int nrOfBooks;
-
+    String subject;
+    String coursesPHP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
-        index = getIntent().getIntExtra("COURSE",-1);
+        subject = getIntent().getStringExtra("SUBJECT");
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -63,13 +65,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
             Button btn = findViewById(id);
             btnArray.add(btn);
         }
-        //Add Courses to the mathCoursesArray
-        mathCourses.add("linear Algebra");
-        mathCourses.add("Diskret");
-        mathCourses.add("Analys");
-        mathCourses.add("Fler dim");
-        mathCourses.add("Statestik");
-        mathCourses.add("Matte grundkurs");
+
 
         mathNrBooks.add(2);
         mathNrBooks.add(2);
@@ -77,7 +73,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         mathNrBooks.add(1);
         mathNrBooks.add(1);
         mathNrBooks.add(1);
-
+        mathCourses.add("Test");
 
         //Adds how many chapters each course has in the MathNrChaptersArray
 
@@ -87,18 +83,30 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         physicsCourses.add("physics2");
         physicsCourses.add("physics3");
 
+
         //checks if the user pressed the Math or the physichs button in the homepage
-        if(index == 0) {
+        getCourses(subject);
+        fillCourseArray(coursesPHP);
             setTextBtnMath();
-        }
-        else if(index == 1){
-            setTextBtnPhys();
-        }
+
+
 
         //Make the buttons clickable
         for (int i = 0; i < mathCourses.size(); i++) {
             btnArray.get(i).setOnClickListener( this);
         }
+
+
+    }
+
+    private void fillCourseArray(String str) {
+
+            String[]  arrOfCourses = str.split(",");
+
+            for(String i: arrOfCourses){
+                mathCourses.add(i);
+            }
+
 
 
     }
@@ -127,7 +135,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-
+    //checks which button that is pressed when the subjects it maths
     public void checkPressedBtnMath(int id) {
 
 
@@ -141,7 +149,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
-
+    // Opens the class books and send som variables through
     public void openBooks() {
 
         Intent intent = new Intent(this, Books.class);
@@ -151,7 +159,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         startActivity(intent);
     }
 
-
+    //sets the texts on each button and make the buttons without any text invisible
     public void setTextBtnMath(){
 
         for(int i=0; i<mathCourses.size();i++) {
@@ -166,6 +174,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
 
     }
+    //sets the texts on each button and make the buttons without any text invisible
     public void setTextBtnPhys() {
 
         for(int i=0; i<physicsCourses.size();i++) {
@@ -179,18 +188,23 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private void getCourses(ArrayList<String> courses){
+
+    public void getCourses(final String subject){
         final ProgressDialog progressDialog = new ProgressDialog(Courses.this);
         progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(false);
-        progressDialog.setTitle("Courses");
+        progressDialog.setTitle("Books");
         progressDialog.show();
         String url = "http://192.168.1.112/courses.php";
+
+
+
+
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.equals("Successfully Created Account")) {
+                if (response.equals("0 results")) {
                     progressDialog.dismiss();
                     Toast.makeText(Courses.this, response, Toast.LENGTH_SHORT).show();
 
@@ -210,16 +224,10 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
             }
         }
         ) {
-            protected Map<String, String> getParams() throws AuthFailureError {
+            public Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> param = new HashMap<>();
-                param.put("firstname",firstName);
-                param.put("lastname",lastName);
-                param.put("email",email);
-                param.put("education",education);
-                param.put("username",username);
-                param.put("password",password);
-
-
+                param.put("subject",subject);
+                coursesPHP = param.get("course");
                 return param;
 
             }
@@ -227,6 +235,6 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getmInstance(Courses.this).addToRequestQueue(request);
     }
-    }
+
 
 }

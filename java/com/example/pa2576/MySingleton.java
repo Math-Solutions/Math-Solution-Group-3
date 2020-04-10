@@ -12,6 +12,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
 
 public class MySingleton {
+
     private static MySingleton mInstance;
     private RequestQueue mRequestQueu;
     private Context mCtx;
