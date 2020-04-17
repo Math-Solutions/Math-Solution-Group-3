@@ -17,11 +17,11 @@ If you have done everything correctly and follow the youtube videos you should b
 
 Navigate in Github:
 
-Java
+Java:
 To find all java code navigate app -> src -> main -> java/com/example/pa2576
 
-xml
+xml:
 To find all xml code navigate app -> src -> main -> res -> layout
 
-php
+php :
 To find all php code navigate phpcode
