@@ -14,3 +14,14 @@ In order to succesfully use our application you need to the following things.
 	2.3 Now you have to add all the php files and this you do under the XAMPP -> htdocs folder
 
 If you have done everything correctly and follow the youtube videos you should be able to use everything correctly
+
+Navigate in Github:
+
+Java
+To find all java code navigate app -> src -> main -> java/com/example/pa2576
+
+xml
+To find all xml code navigate app -> src -> main -> res -> layout
+
+php
+To find all php code navigate phpcode
