@@ -67,31 +67,9 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
             Button btn = findViewById(id);
             btnArray.add(btn);
         }
-/*
-        //Test();
-        mathNrBooks.add(2);
-        mathNrBooks.add(2);
-        mathNrBooks.add(2);
-        mathNrBooks.add(1);
-        mathNrBooks.add(1);
-        mathNrBooks.add(1);
-        mathCourses.add("Test");
-
-        //Adds how many chapters each course has in the MathNrChaptersArray
 
 
-        //Add Courses to the physicsArray
-        physicsCourses.add("physics1");
-        physicsCourses.add("physics2");
-        physicsCourses.add("physics3");
-
-*/
-        //checks if the user pressed the Math or the physichs button in the homepage
         getCourses(subject);
-        //fillCourseArray(coursesPHP);
-
-        //setTextBtnMath();
-
 
 
         //Make the buttons clickable
@@ -133,8 +111,6 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     public void openBooks() {
 
         Intent intent = new Intent(this, Books.class);
-        //intent.putExtra("NAME_OF_BOOK", bookName);
-        //intent.putExtra("NR_OF_BOOKS", nrOfBooks);
         intent.putExtra("CHOSEN_COURSE", courseName);
         startActivity(intent);
     }
@@ -156,7 +132,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-
+    //Input value Subject into database and extract all the courses with that subject
     public void getCourses(final String subject) {
         final ProgressDialog progressDialog = new ProgressDialog(Courses.this);
         progressDialog.setCancelable(false);

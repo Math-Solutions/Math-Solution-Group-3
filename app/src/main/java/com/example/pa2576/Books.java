@@ -112,36 +112,25 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
     public void checkPressedBtnBook(int id) {
 
 
+            for(int i=0; i<btnArray.size();i++) {
+                if (btnArray.get(i).getId() == id) {
 
-            if(btnArray.get(0).getId() == id) {
-                    for (int j = 0; j < chosenBook + 1; j++) {
-                        if (j == chosenBook) {
-                            number = chapterArrayOne.get(j);
-                            bookName = (btnArray.get(0).getText().toString());
-                        }
+                        bookName = (btnArray.get(i).getText().toString());
                     }
                 }
 
-            if(btnArray.get(1).getId() == id) {
-                    for (int j = 0; j < chosenBook + 2; j++) {
-                        if (j == chosenBook) {
-                            number = chapterArrayTwo.get(j);
-                            bookName = (btnArray.get(1).getText().toString());
 
-                        }
-                    }
-
-                }
                 openChapters();
     }
     //opens the chapters class and sends som variables into that class
     public void openChapters() {
 
         Intent intent = new Intent(this, Chapter.class);
-        intent.putExtra("NR_OF_CHAPTERS", number);
-        intent.putExtra("CHOSEN_BOOK", courseName + " -> " + bookName);
+        intent.putExtra("BOOK_NAME", bookName);
+        intent.putExtra("HEAD_NAVIGATOR", courseName + " -> " + bookName);
         startActivity(intent);
     }
+    //Input value course into database and extract all the books on that course
     public void getBooks(final String course) {
         final ProgressDialog progressDialog = new ProgressDialog(Books.this);
         progressDialog.setCancelable(false);

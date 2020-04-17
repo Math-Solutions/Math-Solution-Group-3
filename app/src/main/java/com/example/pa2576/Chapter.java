@@ -26,19 +26,15 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Button> btnArray = new ArrayList<>();
 
 
-    ArrayList<Integer> chapterArray = new ArrayList<>();
-    ArrayList<Integer> nrofTaskinChap = new ArrayList<>();
-
-
-    String courseName;
+    String bookName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
-        courseName = getIntent().getStringExtra("CHOSEN_BOOK");
+        bookName = getIntent().getStringExtra("BOOK_NAME");
 
-        setTitle(getIntent().getStringExtra("CHOSEN_BOOK"));
+        setTitle(getIntent().getStringExtra("HEAD_NAVIGATOR"));
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -60,10 +56,6 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
 
 
         }
-        //fills the array with the nr om the chapters it has
-       // for (int i = 0; i <nrofChapters ; i++) {
-         //   chapterArray.add(i);
-        //}
 
         //makes all the buttons clickable
         for (int i = 0; i < btnArray.size(); i++) {
@@ -71,19 +63,13 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-        nrofTaskinChap.add(12);
-        nrofTaskinChap.add(3);
-        nrofTaskinChap.add(7);
-        nrofTaskinChap.add(13);
-        nrofTaskinChap.add(6);
-        nrofTaskinChap.add(11);
-        nrofTaskinChap.add(10);
+        getChapters(bookName);
 
     }
     //sets the texts of all the buttons
-    public void setTextBtn(int nrofChapters) {
-
-        for (int i = 0; i <nrofChapters ; i++) {
+    public void setTextBtn(String nrOfChapters) {
+        int temp = Integer.parseInt(nrOfChapters);
+        for (int i = 0; i <temp ; i++) {
 
             btnArray.get(i).setText("Chapter " +(i+1)+"");
 
@@ -111,18 +97,18 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
     private void checkPressedBtn(int id) {
 
 
-        for (int i = 0; i < chapterArray.size(); i++) {
+        for (int i = 0; i < btnArray.size(); i++) {
             if (btnArray.get(i).getId() == id) {
                 Intent intent = new Intent(this, Tasks.class);
                 intent.putExtra("CHAPTER_NR", (i+1));
-                intent.putExtra("NR_OF_TASKS_IN_CHAPTER",nrofTaskinChap.get(i));
+                intent.putExtra("BOOK_NAME",bookName);
                 intent.putExtra("CHOSEN_BOOK",getIntent().getStringExtra("CHOSEN_BOOK") + " -> Cap " +(i+1) + "");
                 startActivity(intent);
             }
         }
     }
-
-    public void getBooks(final String chapter) {
+    //Input value book into database and extract how many chapters that book has
+    public void getChapters(final String book) {
         final ProgressDialog progressDialog = new ProgressDialog(Chapter.this);
         progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(false);
@@ -137,7 +123,8 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 btnArray.get(0).setText(response);
-                setTextBtn(Integer.parseInt(btnArray.get(0).getText().toString()));
+                setTextBtn(btnArray.get(0).getText().toString());
+                Toast.makeText(Chapter.this,bookName, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -150,7 +137,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
         ) {
             public Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> param = new HashMap<>();
-                param.put("chapter", chapter);
+                param.put("book", book);
                 return param;
 
             }

@@ -130,14 +130,6 @@ public class CreateAccount extends AppCompatActivity {
             setColorText(red);
             Toast.makeText(CreateAccount.this, "Please fill in all the things that are red", Toast.LENGTH_SHORT).show();
             return false;
-        /*} else if (!checkEducation()) {
-            chooseEducation.setText("choose ONE Education");
-            chooseEducation.setTextColor(Color.parseColor(red));
-            return false;
-        } else if (checkUsername()) {
-            createUsername.setTextColor(Color.parseColor(red));
-            notFilled.setText("Username already exists");
-            return false;*/
         } else if (!checkPassword()) {
             setcolorPassword(red);
             Toast.makeText(CreateAccount.this, "The password does not match the criteria or the two passwords do not match", Toast.LENGTH_SHORT).show();
@@ -164,11 +156,6 @@ public class CreateAccount extends AppCompatActivity {
             return false;
     }
 
-    private boolean checkEmail() {
-
-
-        return true;
-    }
     //Sets the color of the textview and so on
     private void setColorText(String color) {
 

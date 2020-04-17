@@ -50,12 +50,6 @@
         Button forgotPass = findViewById(R.id.forgotbtn);
         loginState = findViewById(R.id.loginStateBox);
 
-        searchTagsList.add("linear Algebra");
-        searchTagsList.add("Diskret");
-        searchTagsList.add("Analys");
-        searchTagsList.add("Fler dim");
-        searchTagsList.add("Statestik");
-        searchTagsList.add("Matte grundkurs");
 
 
         signINBtn.setOnClickListener(this);
@@ -118,7 +112,7 @@
         startActivity(intent);
     }
 
-
+        //Input value username and password into database and checks if there is a user with that Username and has that password
     private void login(final String username,final String password){
         final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setCancelable(false);
