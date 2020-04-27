@@ -37,11 +37,11 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
     //If the index is 0 the mathcourses will be displayed and if it is 1 the physichscourses will be displayed
     int index;
-    String courseName;
+   public static String courseName;
     String bookName;
     int nrOfBooks;
     String subject;
-    public static String coursesPHP = "test2131PHP";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +99,6 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
 
         for (int i = 0; i <btnArray.size() ; i++) {
             if(btnArray.get(i).getId() == id){
-               // bookName = btnArray.get(i).getText().toString() ;
-                //nrOfBooks = mathNrBooks.get(i);
                 courseName = btnArray.get(i).getText().toString();
                 openBooks();
             }
@@ -111,7 +109,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
     public void openBooks() {
 
         Intent intent = new Intent(this, Books.class);
-        intent.putExtra("CHOSEN_COURSE", courseName);
+        //intent.putExtra("CHOSEN_COURSE", courseName);
         startActivity(intent);
     }
 
@@ -139,7 +137,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener {
         progressDialog.setIndeterminate(false);
         progressDialog.setTitle("Courses");
         progressDialog.show();
-        String url = "http://192.168.1.112/courses.php";
+        String url = "http://10.0.2.2/courses.php";
 
 
 

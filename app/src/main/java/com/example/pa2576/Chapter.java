@@ -26,15 +26,15 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Button> btnArray = new ArrayList<>();
 
 
-    String bookName;
-
+    //String bookName;
+    public static String chapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
-        bookName = getIntent().getStringExtra("BOOK_NAME");
+        //bookName = getIntent().getStringExtra("BOOK_NAME");
 
-        setTitle(getIntent().getStringExtra("HEAD_NAVIGATOR"));
+        setTitle(Books.bookName);
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -63,7 +63,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-        getChapters(bookName);
+        getChapters(Books.bookName);
 
     }
     //sets the texts of all the buttons
@@ -100,9 +100,10 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
         for (int i = 0; i < btnArray.size(); i++) {
             if (btnArray.get(i).getId() == id) {
                 Intent intent = new Intent(this, Tasks.class);
-                intent.putExtra("CHAPTER_NR", (i+1));
-                intent.putExtra("BOOK_NAME",bookName);
-                intent.putExtra("CHOSEN_BOOK",getIntent().getStringExtra("CHOSEN_BOOK") + " -> Cap " +(i+1) + "");
+                //intent.putExtra("CHAPTER_NR", (i+1));
+               // intent.putExtra("BOOK_NAME",bookName);
+                chapter = i+1+"";
+                //intent.putExtra("CHOSEN_BOOK",getIntent().getStringExtra("CHOSEN_BOOK") + " -> Cap " +(i+1) + "");
                 startActivity(intent);
             }
         }
@@ -114,7 +115,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
         progressDialog.setIndeterminate(false);
         progressDialog.setTitle("Books");
         progressDialog.show();
-        String url = "http://192.168.1.112/chapters.php";
+        String url = "http://10.0.2.2/chapters.php";
 
 
 
@@ -124,7 +125,7 @@ public class Chapter extends AppCompatActivity implements View.OnClickListener {
                 progressDialog.dismiss();
                 btnArray.get(0).setText(response);
                 setTextBtn(btnArray.get(0).getText().toString());
-                Toast.makeText(Chapter.this,bookName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Chapter.this,Books.bookName, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override

@@ -29,7 +29,7 @@
 
     public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText usernameLogin;
+    public static EditText usernameLogin;
     EditText password;
     SharedPreferences sharedPreferences;
 
@@ -102,7 +102,7 @@
 
 
     public void openCreateAccount() {
-        Intent intent = new Intent(this, CreateAccount.class);
+        Intent intent = new Intent(this, uploadSolution.class);
         startActivity(intent);
     }
 
@@ -119,7 +119,7 @@
         progressDialog.setIndeterminate(false);
         progressDialog.setTitle("Welcome");
         progressDialog.show();
-        String url = "http://192.168.1.112/login.php";
+        String url = "http://10.0.2.2/login.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override

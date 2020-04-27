@@ -25,9 +25,9 @@ public class ChangeProfilePic extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                Intent intent1 = new Intent(this, MainActivity);
+              // Intent intent1 = new Intent(this, MainActivity.class);
                 startActivityForResult(intent,0);
-//                startActivity(intent1);
+//              startActivity(intent1);
             }
         });
     }

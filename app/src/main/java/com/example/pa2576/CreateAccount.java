@@ -205,7 +205,7 @@ public class CreateAccount extends AppCompatActivity {
         progressDialog.setIndeterminate(false);
         progressDialog.setTitle("Creating the Account");
         progressDialog.show();
-        String url = "http://192.168.1.112/createAccount.php";
+        String url = "http://10.0.2.2/createAccount.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override

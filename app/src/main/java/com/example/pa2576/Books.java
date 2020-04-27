@@ -28,21 +28,21 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Integer> chapterArrayOne = new ArrayList<>();
     ArrayList<Integer> chapterArrayTwo = new ArrayList<>();
 
-    int chosenBook;
+    //int chosenBook;
     int nrOfBooks;
-    String bookName;
+    public static String bookName;
     int number=1;
-    String courseName;
+    //String courseName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
         //Retrieve variables from other classes
-        chosenBook = getIntent().getIntExtra("NAME_OF_BOOK",-1);
-        nrOfBooks = getIntent().getIntExtra("NR_OF_BOOK",0);
-        courseName = getIntent().getStringExtra("CHOSEN_COURSE");
-        setTitle(courseName);
+        //chosenBook = getIntent().getIntExtra("NAME_OF_BOOK",-1);
+        //nrOfBooks = getIntent().getIntExtra("NR_OF_BOOK",0);
+        //courseName = getIntent().getStringExtra("CHOSEN_COURSE");
+        setTitle(Courses.courseName);
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
         idArray.add(R.id.button3);
@@ -71,7 +71,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
 
        //checkbook();
-        getBooks(courseName);
+        getBooks(Courses.courseName);
 
         //Make the buttons clickable
         for (int i = 0; i < btnArray.size(); i++) {
@@ -126,8 +126,8 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
     public void openChapters() {
 
         Intent intent = new Intent(this, Chapter.class);
-        intent.putExtra("BOOK_NAME", bookName);
-        intent.putExtra("HEAD_NAVIGATOR", courseName + " -> " + bookName);
+        //intent.putExtra("BOOK_NAME", bookName);
+        //intent.putExtra("HEAD_NAVIGATOR", courseName + " -> " + bookName);
         startActivity(intent);
     }
     //Input value course into database and extract all the books on that course
@@ -137,7 +137,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
         progressDialog.setIndeterminate(false);
         progressDialog.setTitle("Books");
         progressDialog.show();
-        String url = "http://192.168.1.112/books.php";
+        String url = "http://10.0.2.2/books.php";
 
 
 
