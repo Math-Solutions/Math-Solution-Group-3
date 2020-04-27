@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/teacherSolThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SolutionThree"
+        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="221dp" />
+
+    <TextView
+        android:id="@+id/teacherSolutions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teacher Solutions"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="35dp" />
+
+    <Button
+        android:id="@+id/solOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solution One"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.329"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="89dp" />
+
+    <Button
+        android:id="@+id/teacherSolTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solution Two"
+        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="160dp" />
+
+    <TextView
+        android:id="@+id/studentSol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student Solution"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="332dp" />
+
+    <Button
+        android:id="@+id/studentSolOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solution one"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="381dp" />
+
+    <Button
+        android:id="@+id/studentSolTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="solution two"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="449dp" />
+
+    <Button
+        android:id="@+id/studentSolThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="solution three"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="523dp" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="592dp" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="90dp"
+        tools:layout_editor_absoluteY="662dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
