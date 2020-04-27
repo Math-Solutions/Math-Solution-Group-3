@@ -30,6 +30,7 @@
     public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static EditText usernameLogin;
+    public static String access;
     EditText password;
     SharedPreferences sharedPreferences;
 
@@ -102,13 +103,13 @@
 
 
     public void openCreateAccount() {
-        Intent intent = new Intent(this, uploadSolution.class);
+        Intent intent = new Intent(this, ViewSolution.class);
         startActivity(intent);
     }
 
 
     public void openForgot() {
-        Intent intent = new Intent(this, Forgot.class);
+        Intent intent = new Intent(this, Menu.class);
         startActivity(intent);
     }
 
@@ -124,9 +125,14 @@
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.equals("Login Success")) {
-                    progressDialog.dismiss();
+                String temp = usernameLogin.getText().toString();
+                usernameLogin.setText(response);
+                String[] loginArray = usernameLogin.getText().toString().split(",");
+                usernameLogin.setText(temp);
 
+                if (loginArray[0].equals("Login Success")) {
+                    progressDialog.dismiss();
+                    access = loginArray[1];
                     Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     if (loginState.isChecked()) {

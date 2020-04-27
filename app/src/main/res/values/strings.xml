@@ -129,5 +129,7 @@
     <string name="other_education">Other Education</string>
     <string name="textview">TextView</string>
     <string name="_100">100</string>
+    <string name="drawerOpen" />
+    <string name="drawerClose" />
 </resources>
 

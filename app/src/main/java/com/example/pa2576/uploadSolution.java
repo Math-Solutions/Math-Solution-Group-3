@@ -174,7 +174,7 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> param = new HashMap<>();
                 param.put("image",imageToString(bitmap));
-                param.put("name",nameOfPhoto.getText().toString());
+                param.put("name",nameOfPhoto.getText().toString().trim());
                 param.put("username","MainActivity.usernameLogin.getText().toString()");
                 param.put("comment",comment.getText().toString());
                 param.put("taskID","Tasks.taskID");
