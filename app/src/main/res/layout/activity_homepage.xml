@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Homepage">
 
+    <include
+        layout= "@layout/activity_menu"></include>
     <Button
         android:id="@+id/mathBtn"
         android:layout_width="wrap_content"

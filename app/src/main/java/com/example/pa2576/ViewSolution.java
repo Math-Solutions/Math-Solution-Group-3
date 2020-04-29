@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,31 +34,35 @@ import java.util.HashMap;
 import java.util.Map;
 
     public class ViewSolution  extends AppCompatActivity implements View.OnClickListener {
-        ImageButton camera;
+
         ImageView solutionPhoto;
-        EditText comment, nameOfPhoto;
-        Button uploadButton;
-        ImageButton galleryButton;
-        String name = "Name";
-
+        TextView comment;
+        Button removeSolBtn,upVotebtn,downVotebtn,reportbtn;
+        String name = SeeSolutions.nameOfPhoto;
+        int votes = SeeSolutions.totalVotes;
         String imagePath;
-
+        int voteCheck=0;
+        String username;
 
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_upload_solution);
+            setContentView(R.layout.activity_view_solution);
 
-            nameOfPhoto = findViewById(R.id.nameOfPhoto);
-            camera = findViewById(R.id.cameraBtn);
-            solutionPhoto = findViewById(R.id.picIV);
-            comment = findViewById(R.id.commentToSolutionText);
-            uploadButton = findViewById(R.id.uploadBtn);
-            galleryButton = findViewById(R.id.galleryBtn);
-            camera.setOnClickListener(this);
-            uploadButton.setOnClickListener(this);
-            galleryButton.setOnClickListener(this);
+
+
+            solutionPhoto = findViewById(R.id.solutionImage);
+            comment = findViewById(R.id.commentToSolution);
+            removeSolBtn = findViewById(R.id.removeSolBtn);
+            upVotebtn = findViewById(R.id.upvoteBtn);
+            downVotebtn = findViewById(R.id.downvoteBtn);
+            reportbtn = findViewById(R.id.report);
+
+            removeSolBtn.setOnClickListener(this);
+            upVotebtn.setOnClickListener(this);
+            downVotebtn.setOnClickListener(this);
+            reportbtn.setOnClickListener(this);
 
             getSolution(name);
 
@@ -68,15 +73,28 @@ import java.util.Map;
 
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.cameraBtn:
+                case R.id.removeSolBtn:
+                    removeSolution(name);
+
+                    break;
+                case R.id.upvoteBtn:
+
+                    if(voteCheck==0){
+                    votes++;
+                    updateVotes(name,votes+"");
+                    voteCheck++;
+                }
 
 
                     break;
-                case R.id.uploadBtn:
-                    viewImage();
+                case R.id.downvoteBtn:
+                    if(voteCheck==0){
+                        votes--;
+                        updateVotes(name,votes+"");
+                        voteCheck++;
+                    }
 
-                    break;
-                case R.id.galleryBtn:
+                case R.id.report:
 
 
 
@@ -88,13 +106,106 @@ import java.util.Map;
 
         private void viewImage() {
             String url = "http://10.0.2.2/" + imagePath;
-            nameOfPhoto.setText(url);
             Picasso.get().load(url).into(solutionPhoto);
 
         }
 
+        private void updateVotes(final String name,final String votes) {
+            final ProgressDialog progressDialog = new ProgressDialog(ViewSolution.this);
+            progressDialog.setCancelable(false);
+            progressDialog.setIndeterminate(false);
+            progressDialog.setTitle("Retrieving image to database");
+            progressDialog.show();
+            String url = "http://10.0.2.2/updateVotes.php";
+
+            //Toast.makeText(uploadSolution.this, "response", Toast.LENGTH_SHORT).show();
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                //Here the method checks if the response from the php code is "Successfully created an account" that it should create
+                public void onResponse(String response) {
+
+                    progressDialog.dismiss();
+                    Toast.makeText(ViewSolution.this, response, Toast.LENGTH_SHORT).show();
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progressDialog.dismiss();
+                    Toast.makeText(ViewSolution.this, error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            ) {
 
 
+                //here is the variables that goes into the php code
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    HashMap<String, String> param = new HashMap<>();
+                    param.put("name",name);
+                    param.put("votes",votes);
+
+
+
+
+                    return param;
+
+                }
+            };
+
+            request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            MySingleton.getmInstance(ViewSolution.this).addToRequestQueue(request);
+
+        }
+
+        private void removeSolution(final String name) {
+            final ProgressDialog progressDialog = new ProgressDialog(ViewSolution.this);
+            progressDialog.setCancelable(false);
+            progressDialog.setIndeterminate(false);
+            progressDialog.setTitle("Retrieving image to database");
+            progressDialog.show();
+            String url = "http://10.0.2.2/removeImage.php";
+
+            //Toast.makeText(uploadSolution.this, "response", Toast.LENGTH_SHORT).show();
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                //Here the method checks if the response from the php code is "Successfully created an account" that it should create
+                public void onResponse(String response) {
+
+                    if(response.equals("The picture has been deleted")){
+                        progressDialog.dismiss();
+                        Toast.makeText(ViewSolution.this, response, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ViewSolution.this, SeeSolutions.class));
+
+                    }
+                    else{
+                        progressDialog.dismiss();
+                        Toast.makeText(ViewSolution.this, response, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progressDialog.dismiss();
+                    Toast.makeText(ViewSolution.this, error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            ) {
+
+
+                //here is the variables that goes into the php code
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    HashMap<String, String> param = new HashMap<>();
+                    param.put("name",name);
+
+                    return param;
+
+                }
+            };
+
+            request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            MySingleton.getmInstance(ViewSolution.this).addToRequestQueue(request);
+
+        }
 
         private void getSolution(final String name) {
             final ProgressDialog progressDialog = new ProgressDialog(ViewSolution.this);
@@ -110,14 +221,28 @@ import java.util.Map;
                 //Here the method checks if the response from the php code is "Successfully created an account" that it should create
                 public void onResponse(String response) {
 
+                    if(response.equals("No image found")){
                         progressDialog.dismiss();
                         Toast.makeText(ViewSolution.this, response, Toast.LENGTH_SHORT).show();
 
-                        uploadButton.setText(response);
-                        String[] getData = uploadButton.getText().toString().split(",");
-                        imagePath =  getData[0];
+                    }
+                    else{
+                        progressDialog.dismiss();
+                        
 
+                        reportbtn.setText(response);
+                        String[] getData = reportbtn.getText().toString().split(",");
+                        imagePath =  getData[0];
+                        username = getData[2];
+                        reportbtn.setText("Report");
+                        comment.setText(getData[1]);
+
+                        if(!MainActivity.access.equals("Teacher") && !MainActivity.access.equals("Admin") && !username.equals(MainActivity.usernameLogin.getText().toString())){
+                            removeSolBtn.setVisibility(View.GONE);
+                        }
                         viewImage();
+                    }
+
                 }
             }, new Response.ErrorListener() {
                 @Override

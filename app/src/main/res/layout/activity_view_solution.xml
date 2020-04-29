@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewSolution">
+
+    <ImageView
+        android:id="@+id/solutionImage"
+        android:layout_width="413dp"
+        android:layout_height="481dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064"
+        />
+
+    <Button
+        android:id="@+id/upvoteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:background="#FFFFFF"
+        android:text="Upvote"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/downvoteBtn"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/solutionImage"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/downvoteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:background="#FFFFFF"
+        android:text="Downvote"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.718"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/solutionImage"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Report"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/solutionImage"
+        app:layout_constraintVertical_bias="0.92" />
+
+    <Button
+        android:id="@+id/removeSolBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove Solution"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/report"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upvoteBtn"
+        app:layout_constraintVertical_bias="0.916" />
+
+    <TextView
+        android:id="@+id/commentToSolution"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="There is no comment for this Solution"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/solutionImage"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

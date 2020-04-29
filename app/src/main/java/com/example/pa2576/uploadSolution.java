@@ -76,6 +76,7 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
             case R.id.uploadBtn:
                 uploadSolution();
 
+
                 break;
             case R.id.galleryBtn:
 
@@ -152,7 +153,7 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
                 if (response.equals("The Solution was uploaded successfully")) {
                     progressDialog.dismiss();
                     Toast.makeText(uploadSolution.this, response, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(uploadSolution.this, MainActivity.class));
+                    startActivity(new Intent(uploadSolution.this, SeeSolutions.class));
                 }
                 else{
                     //displays the respone that was received from the php code
@@ -175,10 +176,10 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
                 HashMap<String, String> param = new HashMap<>();
                 param.put("image",imageToString(bitmap));
                 param.put("name",nameOfPhoto.getText().toString().trim());
-                param.put("username","MainActivity.usernameLogin.getText().toString()");
+                param.put("username",MainActivity.usernameLogin.getText().toString());
                 param.put("comment",comment.getText().toString());
-                param.put("taskID","Tasks.taskID");
-                param.put("bookID","Books.bookName");
+                param.put("taskID",Tasks.taskID);
+                param.put("bookID",Books.bookName);
 
 
                 return param;

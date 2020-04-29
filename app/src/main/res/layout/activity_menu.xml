@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer"
+    android:layout_gravity="end"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/c1"
     tools:context=".Menu"
     tools:openDrawer="end">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
         android:id="@+id/navigationView"
         app:menu="@menu/menu_item"
         app:headerLayout="@layout/header"
-       android:background="@color/c2"
+        android:background="@color/c2"
         android:layout_gravity="start"
         app:itemTextColor="#FFF"/>
 

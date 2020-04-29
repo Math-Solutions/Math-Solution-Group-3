@@ -101,7 +101,7 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
 
         for (int i = 0; i < btnArray.size(); i++) {
             if (btnArray.get(i).getId() == id) {
-                Intent intent = new Intent(this, Tasks.class);
+                Intent intent = new Intent(this, SeeSolutions.class);
                 taskID = btnArray.get(i).getText().toString();
                 intent.putExtra("CHAPTER_NR", (i+1));
                 intent.putExtra("BOOK_NAME",bookName);

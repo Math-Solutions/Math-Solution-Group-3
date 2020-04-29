@@ -5,6 +5,7 @@
     import android.content.Intent;
     import android.content.SharedPreferences;
     import android.os.Bundle;
+    import android.view.MenuItem;
     import android.view.View;
     import android.widget.Button;
     import android.widget.CheckBox;
@@ -12,7 +13,11 @@
     import android.widget.TextView;
     import android.widget.Toast;
 
+    import androidx.annotation.NonNull;
+    import androidx.appcompat.app.ActionBarDrawerToggle;
     import androidx.appcompat.app.AppCompatActivity;
+    import androidx.appcompat.widget.Toolbar;
+    import androidx.drawerlayout.widget.DrawerLayout;
 
     import com.android.volley.AuthFailureError;
     import com.android.volley.DefaultRetryPolicy;
@@ -22,17 +27,23 @@
     import com.android.volley.VolleyError;
     import com.android.volley.toolbox.StringRequest;
     import com.android.volley.toolbox.Volley;
+    import com.google.android.material.navigation.NavigationView;
 
     import java.util.ArrayList;
     import java.util.HashMap;
     import java.util.Map;
 
-    public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    public class MainActivity extends Menu implements View.OnClickListener{
 
     public static EditText usernameLogin;
     public static String access;
     EditText password;
     SharedPreferences sharedPreferences;
+
+        DrawerLayout drawerLayout;
+        Toolbar toolbar;
+        NavigationView navigationView;
+        ActionBarDrawerToggle toggle;
 
     CheckBox loginState;
 
@@ -41,6 +52,7 @@
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         usernameLogin = findViewById(R.id.userNameLogin);
@@ -53,21 +65,33 @@
 
 
 
+
+
+
         signINBtn.setOnClickListener(this);
         createAccount.setOnClickListener(this);
         forgotPass.setOnClickListener(this);
 
+        drawerLayout = findViewById(R.id.drawer);
+        toolbar = findViewById(R.id.toolbar);
+        navigationView = findViewById(R.id.navigationView);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
 
 
-
-
-
-        searchMethod();
+                searchMethod();
         String loginStatus = sharedPreferences.getString(getResources().getString(R.string.prefLoginState),"");
         if (loginStatus.equals("Loggedin")){
             startActivity(new Intent(MainActivity.this, Homepage.class));
         }
     }
+
+
 
         private void searchMethod() {
 
@@ -103,13 +127,13 @@
 
 
     public void openCreateAccount() {
-        Intent intent = new Intent(this, ViewSolution.class);
+        Intent intent = new Intent(this, Menu.class);
         startActivity(intent);
     }
 
 
     public void openForgot() {
-        Intent intent = new Intent(this, Menu.class);
+        Intent intent = new Intent(this, ChangeProfile.class);
         startActivity(intent);
     }
 
@@ -166,6 +190,13 @@
         request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getmInstance(MainActivity.this).addToRequestQueue(request);
     }
+
+        @Override
+        public void onPointerCaptureChanged(boolean hasCapture) {
+
+        }
+
+
     }
 
 
