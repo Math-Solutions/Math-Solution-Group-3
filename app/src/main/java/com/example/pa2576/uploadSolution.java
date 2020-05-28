@@ -64,7 +64,11 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
 
 
     }
-
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(this, SeeSolutions.class);
+        startActivity(intent);
+    }
 
     public void onClick(View v) {
         switch (v.getId()) {

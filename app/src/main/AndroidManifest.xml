@@ -16,6 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".GiveAccess"></activity>
+        <activity android:name=".RemoveUser" />
+        <activity android:name=".Administration" />
         <activity android:name=".uploadSolution" />
         <activity android:name=".Solutions" />
         <activity android:name=".Courses" />

@@ -28,7 +28,7 @@ public class Homepage extends Menu implements View.OnClickListener {
     Toolbar toolbar;
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
-
+    Button adminBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +50,16 @@ public class Homepage extends Menu implements View.OnClickListener {
         physics = (Button) findViewById(R.id.physicsBtn);
         info = (Button) findViewById(R.id.infoBtn);
         profile = (Button) findViewById(R.id.profileBtn);
+        adminBtn = findViewById(R.id.AdminBtn);
 
         math.setOnClickListener( this);
         physics.setOnClickListener( this);
         info.setOnClickListener( this);
         profile.setOnClickListener( this);
+        adminBtn.setOnClickListener(this);
+        if(!MainActivity.access.equals("Admin")){
+            adminBtn.setVisibility(View.GONE);
+        }
 
 }
 
@@ -77,7 +82,14 @@ public class Homepage extends Menu implements View.OnClickListener {
             case R.id.profileBtn:
                 openProfile();
                 break;
+            case R.id.AdminBtn:
+                openAdministraion();
+                break;
         }
+    }
+    public void openAdministraion() {
+        Intent profile = new Intent(this, Administration.class);
+        startActivity(profile);
     }
 
     public void openProfile() {

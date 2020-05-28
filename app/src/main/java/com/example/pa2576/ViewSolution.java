@@ -1,5 +1,6 @@
 package com.example.pa2576;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -27,9 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,15 +42,17 @@ import java.util.Map;
         String imagePath;
         int voteCheck=0;
         String username;
+        Button fullScreen;
 
+        ImageView fullScreenImage;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_view_solution);
 
-
-
+            fullScreen = findViewById(R.id.fullScreenBtn);
+            fullScreenImage = findViewById(R.id.solutionImageFullScreen);
             solutionPhoto = findViewById(R.id.solutionImage);
             comment = findViewById(R.id.commentToSolution);
             removeSolBtn = findViewById(R.id.removeSolBtn);
@@ -63,13 +64,18 @@ import java.util.Map;
             upVotebtn.setOnClickListener(this);
             downVotebtn.setOnClickListener(this);
             reportbtn.setOnClickListener(this);
+            fullScreen.setOnClickListener(this);
 
             getSolution(name);
 
 
 
         }
-
+        public void onBackPressed(){
+            super.onBackPressed();
+            Intent intent = new Intent(this, SeeSolutions.class);
+            startActivity(intent);
+        }
 
         public void onClick(View v) {
             switch (v.getId()) {
@@ -99,14 +105,19 @@ import java.util.Map;
 
 
                     break;
+                case R.id.fullScreenBtn:
+                    setContentView(R.layout.activity_fullscreen);
+                    //viewImage(fullScreenImage);
+                    break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + v.getId());
             }
         }
 
-        private void viewImage() {
+        private void viewImage(ImageView image) {
             String url = "http://10.0.2.2/" + imagePath;
-            Picasso.get().load(url).into(solutionPhoto);
+            Picasso.get().load(url).into(image);
+
 
         }
 
@@ -228,7 +239,7 @@ import java.util.Map;
                     }
                     else{
                         progressDialog.dismiss();
-                        
+
 
                         reportbtn.setText(response);
                         String[] getData = reportbtn.getText().toString().split(",");
@@ -240,7 +251,8 @@ import java.util.Map;
                         if(!MainActivity.access.equals("Teacher") && !MainActivity.access.equals("Admin") && !username.equals(MainActivity.usernameLogin.getText().toString())){
                             removeSolBtn.setVisibility(View.GONE);
                         }
-                        viewImage();
+                        viewImage(solutionPhoto);
+
                     }
 
                 }

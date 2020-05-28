@@ -33,7 +33,7 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
 
     String[] votesArray = new String[8];
     String[] nameOfPhotoArray = new String[8];
-
+    Button add;
     public static String nameOfPhoto;
     public static int totalVotes;
 
@@ -62,7 +62,7 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
             idArrayVotes.add(R.id.voteStuFive);
 
 
-            Button add = findViewById(R.id.addSolution);
+            add = findViewById(R.id.addSolution);
 
 
 
@@ -85,10 +85,15 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
 
             getTasks(Books.bookName,Tasks.taskID,"Student");
             getTasks(Books.bookName,Tasks.taskID,"Teacher");
+            Toast.makeText(SeeSolutions.this, btnArray.get(6).getText().toString(), Toast.LENGTH_SHORT).show();
 
 
         }
-
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(this, Tasks.class);
+        startActivity(intent);
+    }
     public void setTextBtn(String[] array) {
         int index=0;
         for (int i = 0; i <btnArray.size() ; i++) {
@@ -107,6 +112,12 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
                 }
 
             }
+        }
+        if((MainActivity.access.equals("Student") || MainActivity.access.equals("Admin")) && btnArray.get(7).getText().toString().equals("Solution 5")){
+            add.setVisibility(View.GONE);
+        }
+        else if(MainActivity.access.equals("Teacher") && btnArray.get(2).getText().toString().equals("Solution 3")){
+            add.setVisibility(View.GONE);
         }
     }
 
@@ -176,7 +187,7 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
 
                 if(response.equals("no images found")){
                     progressDialog.dismiss();
-                    Toast.makeText(SeeSolutions.this, response, Toast.LENGTH_SHORT).show();
+
 
                     setTextBtn(nameOfPhotoArray);
                 }
