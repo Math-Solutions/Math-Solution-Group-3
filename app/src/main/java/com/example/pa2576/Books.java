@@ -1,6 +1,7 @@
 package com.example.pa2576;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,23 +27,20 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<Integer> idArray = new ArrayList<>();
     ArrayList<Button> btnArray = new ArrayList<>();
-    ArrayList<Integer> chapterArrayOne = new ArrayList<>();
-    ArrayList<Integer> chapterArrayTwo = new ArrayList<>();
 
-    //int chosenBook;
-    int nrOfBooks;
+
     public static String bookName;
-    int number=1;
-    //String courseName;
+
+    private BooksModel bModel;
+    private BooksController bView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
-        //Retrieve variables from other classes
-        //chosenBook = getIntent().getIntExtra("NAME_OF_BOOK",-1);
-        //nrOfBooks = getIntent().getIntExtra("NR_OF_BOOK",0);
-        //courseName = getIntent().getStringExtra("CHOSEN_COURSE");
+
         setTitle(Courses.courseName);
         idArray.add(R.id.button1);
         idArray.add(R.id.button2);
@@ -62,6 +61,7 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
             Button btn = findViewById(id);
             btnArray.add(btn);
         }
+        bModel = new BooksModel(btnArray);
 
 
 
@@ -75,21 +75,30 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
         //Make the buttons clickable
         for (int i = 0; i < btnArray.size(); i++) {
-            btnArray.get(i).setOnClickListener( this);
+           // btnArray.get(i).setOnClickListener(new BooksController(getApplicationContext()));
+            btnArray.get(i).setOnClickListener(this);
         }
 
 
 
+        //bookName = bView.getString();
+        //openChapters();
+
 
     }
-    //Set what happens when you click a button
+
     public void onClick(View v) {
         switch (v.getId()){
             default:
-               checkPressedBtnBook(v.getId());
+                bModel.getPressedBtnBook(v.getId());
+                bookName = bModel.getString();
+
+                openChapters();
+
                 break;
         }
     }
+
 
 
 
@@ -109,28 +118,15 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
     }
     //checks which button that is pressed
-    public void checkPressedBtnBook(int id) {
 
-
-            for(int i=0; i<btnArray.size();i++) {
-                if (btnArray.get(i).getId() == id) {
-
-                        bookName = (btnArray.get(i).getText().toString());
-                    }
-                }
-
-
-                openChapters();
-    }
     //opens the chapters class and sends som variables into that class
     public void openChapters() {
 
         Intent intent = new Intent(this, Chapter.class);
-        //intent.putExtra("BOOK_NAME", bookName);
-        //intent.putExtra("HEAD_NAVIGATOR", courseName + " -> " + bookName);
         startActivity(intent);
     }
     //Input value course into database and extract all the books on that course
+
     public void getBooks(final String course) {
         final ProgressDialog progressDialog = new ProgressDialog(Books.this);
         progressDialog.setCancelable(false);
@@ -171,4 +167,6 @@ public class Books extends AppCompatActivity implements View.OnClickListener {
 
 
     }
+
+
 }
