@@ -6,15 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".Homepage">
 
-    <include
-        layout= "@layout/activity_menu"></include>
     <Button
         android:id="@+id/mathBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00BCD4"
         android:fontFamily="serif-monospace"
-        android:text="math courses"
+        android:text="@string/math_courses"
         android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,12 +23,11 @@
 
     <Button
         android:id="@+id/physicsBtn"
-        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00BCD4"
         android:fontFamily="serif-monospace"
-        android:text="physics courses"
+        android:text="@string/physics_courses"
         android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,25 +38,27 @@
 
     <Button
         android:id="@+id/infoBtn"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:clickable="true"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00BCD4"
         android:fontFamily="serif-monospace"
-        android:text="Info"
+        android:text="@string/info"
         android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/physicsBtn"
-        app:layout_constraintVertical_bias="0.224" />
+        app:layout_constraintVertical_bias="0.224"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Math Solutions"
+        android:text="@string/welcome_to_math_solutions"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/mathBtn"
@@ -84,12 +83,13 @@
         android:id="@+id/textView2"
         android:layout_width="384dp"
         android:layout_height="41dp"
-        android:text="Start by choosing subject or search for a course, task or a keyword"
+        android:text="@string/start_by_choosing_subject_or_search_for_a_course_task_or_a_keyword"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/mathBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 
     <Button
         android:id="@+id/profileBtn"
@@ -97,7 +97,11 @@
         android:layout_height="wrap_content"
         android:background="#00BCD4"
         android:fontFamily="serif-monospace"
-        android:text="Profile"
+        android:text="@string/profile"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_margin="12dp"
+        android:padding="8dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,9 +112,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:text="Administration"
+        android:text="@string/administration"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toEndOf="@+id/profileBtn" />
+
+    <androidx.drawerlayout.widget.DrawerLayout
+
+        android:id="@+id/drawer"
+        android:layout_gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Menu"
+        tools:openDrawer="end">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/c1" />
+
+
+        </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/navigationView"
+            app:menu="@menu/menu_item"
+            app:headerLayout="@layout/header"
+            android:background="@color/c2"
+            android:layout_gravity="start"
+            app:itemTextColor="#FFF"/>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

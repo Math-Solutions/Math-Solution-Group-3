@@ -7,30 +7,22 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 
 import android.graphics.Bitmap;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
-
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -45,13 +37,10 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
     private static final int PICK_IMAGE = 100;
     private final int IMG_REQUEST = 1;
     private Bitmap bitmap;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_solution);
-
         nameOfPhoto = findViewById(R.id.nameOfPhoto);
         camera = findViewById(R.id.cameraBtn);
         solutionPhoto = findViewById(R.id.picIV);
@@ -61,86 +50,58 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
         camera.setOnClickListener(this);
         uploadButton.setOnClickListener(this);
         galleryButton.setOnClickListener(this);
-
-
     }
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(this, SeeSolutions.class);
         startActivity(intent);
     }
-
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.cameraBtn:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, PICK_IMAGE);
-
                 break;
             case R.id.uploadBtn:
                 uploadSolution();
-
-
                 break;
             case R.id.galleryBtn:
-
                 selectImage();
-
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
     }
-
     private void selectImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,IMG_REQUEST);
+        startActivityForResult(intent, IMG_REQUEST);
     }
-
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Uri path = data.getData();
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-
-
-                bitmap =(Bitmap) data.getExtras().get("data");
-                solutionPhoto.setImageBitmap(bitmap);
-                solutionPhoto.setVisibility(View.VISIBLE);
-
-
-
-        }
-
-        else if(requestCode == IMG_REQUEST && data!=null) {
-
-
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            bitmap = (Bitmap) data.getExtras().get("data");
+            solutionPhoto.setImageBitmap(bitmap);
+            solutionPhoto.setVisibility(View.VISIBLE);
+        } else if (requestCode == IMG_REQUEST && data != null) {
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),path);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
                 solutionPhoto.setImageBitmap(bitmap);
                 solutionPhoto.setVisibility(View.VISIBLE);
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
-
     private String imageToString(Bitmap bitmap) {
-
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes,Base64.DEFAULT);
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
 
     }
-
-
     private void uploadSolution() {
         final ProgressDialog progressDialog = new ProgressDialog(uploadSolution.this);
         progressDialog.setCancelable(false);
@@ -148,7 +109,6 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
         progressDialog.setTitle("Uploading image to database");
         progressDialog.show();
         String url = "http://10.0.2.2/uploadImages.php";
-
         //Toast.makeText(uploadSolution.this, "response", Toast.LENGTH_SHORT).show();
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -158,8 +118,7 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
                     progressDialog.dismiss();
                     Toast.makeText(uploadSolution.this, response, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(uploadSolution.this, SeeSolutions.class));
-                }
-                else{
+                } else {
                     //displays the respone that was received from the php code
                     progressDialog.dismiss();
                     Toast.makeText(uploadSolution.this, response, Toast.LENGTH_SHORT).show();
@@ -173,26 +132,19 @@ public class uploadSolution extends AppCompatActivity implements View.OnClickLis
             }
         }
         ) {
-
-
             //here is the variables that goes into the php code
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> param = new HashMap<>();
-                param.put("image",imageToString(bitmap));
-                param.put("name",nameOfPhoto.getText().toString().trim());
-                param.put("username",MainActivity.usernameLogin.getText().toString());
-                param.put("comment",comment.getText().toString());
-                param.put("taskID",Tasks.taskID);
-                param.put("bookID",Books.bookName);
-
-
+                param.put("image", imageToString(bitmap));
+                param.put("name", nameOfPhoto.getText().toString().trim());
+                param.put("username", MainActivity.usernameLogin.getText().toString());
+                param.put("comment", comment.getText().toString());
+                param.put("taskID", Tasks.taskID);
+                param.put("bookID", Books.bookName);
                 return param;
-
             }
         };
-
-        request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getmInstance(uploadSolution.this).addToRequestQueue(request);
-
     }
 }

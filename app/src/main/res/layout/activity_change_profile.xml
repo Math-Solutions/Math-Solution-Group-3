@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ChangeProfile">
 
+    <include
+        layout= "@layout/activity_menu"></include>
     <EditText
         android:id="@+id/LastNameET"
         android:layout_width="wrap_content"

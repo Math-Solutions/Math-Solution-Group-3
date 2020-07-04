@@ -6,12 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".uploadSolution">
 
+    <include
+        layout="@layout/activity_menu"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"></include>
 
     <ImageButton
         android:id="@+id/cameraBtn"
         android:layout_width="124dp"
         android:layout_height="111dp"
-        android:layout_marginTop="296dp"
+        android:layout_marginTop="336dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@android:drawable/ic_menu_camera"

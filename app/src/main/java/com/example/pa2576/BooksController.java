@@ -1,6 +1,7 @@
 package com.example.pa2576;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -9,37 +10,33 @@ import java.util.ArrayList;
 
 public class BooksController implements View.OnClickListener{
 
+    private String string;
+    private ArrayList<Button> myArray;
+    public static int NrofButtons = 13;
 
-    private String mString;
-
-
-    private BooksModel bModel;
     private Context activity;
-    public BooksController(){
+    private Context nextActivity;
+    private BooksModel bModel = new BooksModel();
 
-    }
     public BooksController(Context ctx){
-        this.activity = ctx;
-        mString = null;
-
+        activity = ctx;
     }
-
+    public void setNextActivity(Context nextActivity) {
+        this.nextActivity = nextActivity;
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             default:
-              bModel.getPressedBtnBook(v.getId());
 
-                Toast.makeText(activity.getApplicationContext(), v.getId()+"", Toast.LENGTH_SHORT).show();
-                break;
+              bModel.setId(v.getId());
+              //bModel.getPressedBtnBook();
+              string =  bModel.getString();
+
+              Toast.makeText(activity.getApplicationContext(), string+"", Toast.LENGTH_SHORT).show();
+              //Intent intent = new Intent(activity.getApplicationContext(), Books.class);
+              //activity.startActivity(intent);
+              break;
         }
-
-    }
-
-    public void setString(String s){
-        this.mString = s;
-    }
-    public String getString(){
-        return this.mString;
     }
 }

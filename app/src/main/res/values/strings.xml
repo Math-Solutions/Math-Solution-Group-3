@@ -131,5 +131,13 @@
     <string name="_100">100</string>
     <string name="drawerOpen" />
     <string name="drawerClose" />
+    <string name="info">Info</string>
+    <string name="administration">Administration</string>
+    <string name="profile">Profile</string>
+    <string name="start_by_choosing_subject_or_search_for_a_course_task_or_a_keyword">Start by choosing subject or search for a course, task or a keyword</string>
+    <string name="welcome_to_math_solutions">Welcome to Math Solutions</string>
+    <string name="math_courses">math courses</string>
+    <string name="physics_courses">physics courses</string>
+    <string name="stay_logged_in">Stay logged in</string>
 </resources>
 

@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Administration">
 
+    <include
+        layout= "@layout/activity_menu"></include>
+
     <Button
         android:id="@+id/removeUser"
         android:layout_width="123dp"
         android:layout_height="83dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="60dp"
         android:text="Remove User"
         app:layout_constraintEnd_toStartOf="@+id/giveAccessBtn"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,9 +24,9 @@
         android:id="@+id/giveAccessBtn"
         android:layout_width="119dp"
         android:layout_height="82dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
         android:text="Give Access"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

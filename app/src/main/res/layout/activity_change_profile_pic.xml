@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ChangeProfilePic">
 
+    <include
+        layout= "@layout/activity_menu"></include>
     <ImageButton
     android:id="@+id/cameraBtn"
     android:layout_width="124dp"

@@ -22,70 +22,34 @@ import java.util.Map;
 
 public class Tasks extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<Integer> idArray = new ArrayList<>();
     ArrayList<Button> btnArray = new ArrayList<>();
-
-
-
-   public static String taskID;
-
-    int chapterNR;
-    int nrOfTasks;
+    public static String taskID;
     String bookName;
+    private BooksModel bModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
-        //bookName = getIntent().getStringExtra("BOOK_NAME");
-        //chapterNR = getIntent().getIntExtra("CHAPTER_NR",0);
-        //nrOfTasks = getIntent().getIntExtra("NR_OF_TASKS_IN_CHAPTER",0);
+
         setTitle(Books.bookName + " -> " + Chapter.chapter);
-        idArray.add(R.id.button1);
-        idArray.add(R.id.button2);
-        idArray.add(R.id.button3);
-        idArray.add(R.id.button4);
-        idArray.add(R.id.button5);
-        idArray.add(R.id.button6);
-        idArray.add(R.id.button7);
-        idArray.add(R.id.button8);
-        idArray.add(R.id.button9);
-        idArray.add(R.id.button10);
-        idArray.add(R.id.button11);
-        idArray.add(R.id.button12);
-        idArray.add(R.id.button13);
-
-
-        for (int id : idArray) {
-            Button btn = findViewById(id);
-            btnArray.add(btn);
-
-
+        for (int i = 1; i <= BooksController.NrofButtons; i++) {
+            Button button = findViewById(getResources().getIdentifier("button" + i, "id", this.getPackageName()));
+            btnArray.add(button);
+            btnArray.get(i-1).setOnClickListener(this);
         }
-
-
-        for (int i = 0; i < btnArray.size(); i++) {
-            btnArray.get(i).setOnClickListener(this);
-
-        }
-
+        bModel = new BooksModel(btnArray);
         getTasks(Books.bookName,Chapter.chapter);
     }
     public void setTextBtn(String[] array) {
-
         for (int i = 0; i <array.length ; i++) {
-
             btnArray.get(i).setText(array[i]);
-
         }
         for(int i=0; i<btnArray.size();i++) {
             if (btnArray.get(i).getText().equals("")) {
                 btnArray.get(i).setVisibility(View.GONE);
             }
         }
-
-
     }
-
     public void onClick(View v) {
         switch (v.getId()) {
             default:
@@ -93,12 +57,12 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
                 break;
         }
     }
-
-
-
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(this, Chapter.class);
+        startActivity(intent);
+    }
     private void checkPressedBtn(int id) {
-
-
         for (int i = 0; i < btnArray.size(); i++) {
             if (btnArray.get(i).getId() == id) {
                 Intent intent = new Intent(this, SeeSolutions.class);
@@ -118,9 +82,6 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
         progressDialog.setTitle("Task");
         progressDialog.show();
         String url = "http://10.0.2.2/tasks.php";
-
-
-
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -128,14 +89,13 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
                 btnArray.get(0).setText(response);
                 String[] taskArray = btnArray.get(0).getText().toString().split(",");
                 setTextBtn(taskArray);
-                Toast.makeText(Tasks.this,response, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Tasks.this,response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
                 Toast.makeText(Tasks.this, error.toString(), Toast.LENGTH_SHORT).show();
-
             }
         }
         ) {
@@ -144,16 +104,9 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
                 param.put("book", book);
                 param.put("chapter",chapter);
                 return param;
-
             }
-
         };
         request.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getmInstance(Tasks.this).addToRequestQueue(request);
-
-
     }
-
 }
-
-

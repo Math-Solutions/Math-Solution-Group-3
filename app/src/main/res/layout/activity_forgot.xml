@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Forgot">
 
+    <include
+        layout= "@layout/activity_menu"></include>
     <EditText
         android:id="@+id/EmailET"
         android:layout_width="wrap_content"

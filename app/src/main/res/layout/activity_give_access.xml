@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".GiveAccess">
 
+    <include
+        layout= "@layout/activity_menu"></include>
     <TextView
         android:id="@+id/giveAccessText"
         android:layout_width="wrap_content"

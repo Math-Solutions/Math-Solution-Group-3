@@ -55,12 +55,12 @@ public class ChangeProfile extends AppCompatActivity {
                         if (checkPassword(password.toString()) || password.getText().toString() == null) {
                             UpdateUser(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), username.getText().toString(), password.getText().toString());
                         } else {
-                            Toast.makeText(ChangeProfile.this, "The password needs to be aleast 8 char long, a capital letter and a digit", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangeProfile.this, "The password needs to be at least 8 char long, a capital letter and a digit", Toast.LENGTH_SHORT).show();
                         }
 
                 }
                 else{
-                    Toast.makeText(ChangeProfile.this, "password does not dawdwadmatch password2" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChangeProfile.this, "password does not match password2" , Toast.LENGTH_SHORT).show();
 
                 }
 

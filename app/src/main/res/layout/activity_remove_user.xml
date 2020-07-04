@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".RemoveUser">
 
+    <include
+        layout= "@layout/activity_menu"></include>
+
     <TextView
         android:id="@+id/removeUserText"
         android:layout_width="wrap_content"

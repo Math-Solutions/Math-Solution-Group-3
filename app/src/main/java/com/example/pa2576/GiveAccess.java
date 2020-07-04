@@ -82,7 +82,7 @@ public class GiveAccess extends AppCompatActivity {
 
                 if(response.equals("Users access have been changed")){
                     progressDialog.dismiss();
-                    opeAdministraion();
+                    opeAdministration();
 
 
                 }
@@ -124,7 +124,7 @@ public class GiveAccess extends AppCompatActivity {
 
 
 
-    private void opeAdministraion() {
+    private void opeAdministration() {
         Intent profile = new Intent(this, Administration.class);
         startActivity(profile);
     }

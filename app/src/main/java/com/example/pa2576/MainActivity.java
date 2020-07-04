@@ -22,14 +22,10 @@
     import com.android.volley.AuthFailureError;
     import com.android.volley.DefaultRetryPolicy;
     import com.android.volley.Request;
-    import com.android.volley.RequestQueue;
     import com.android.volley.Response;
     import com.android.volley.VolleyError;
     import com.android.volley.toolbox.StringRequest;
-    import com.android.volley.toolbox.Volley;
     import com.google.android.material.navigation.NavigationView;
-
-    import java.util.ArrayList;
     import java.util.HashMap;
     import java.util.Map;
 
@@ -40,14 +36,11 @@
     EditText password;
     SharedPreferences sharedPreferences;
 
-        DrawerLayout drawerLayout;
-        Toolbar toolbar;
-        NavigationView navigationView;
-        ActionBarDrawerToggle toggle;
-
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
+    NavigationView navigationView;
+    ActionBarDrawerToggle toggle;
     CheckBox loginState;
-
-    ArrayList<String> searchTagsList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,11 +55,6 @@
         Button createAccount = findViewById(R.id.createAccountBtn);
         Button forgotPass = findViewById(R.id.forgotbtn);
         loginState = findViewById(R.id.loginStateBox);
-
-
-
-
-
 
         signINBtn.setOnClickListener(this);
         createAccount.setOnClickListener(this);
@@ -83,20 +71,11 @@
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
-                searchMethod();
         String loginStatus = sharedPreferences.getString(getResources().getString(R.string.prefLoginState),"");
         if (loginStatus.equals("Loggedin")){
             startActivity(new Intent(MainActivity.this, Homepage.class));
         }
     }
-
-
-
-        private void searchMethod() {
-
-        }
-
         @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -120,23 +99,14 @@
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
     }
-
-
-
-
-
-
     public void openCreateAccount() {
-        Intent intent = new Intent(this, Menu.class);
+        Intent intent = new Intent(this, CreateAccount.class);
         startActivity(intent);
     }
-
-
     public void openForgot() {
-        Intent intent = new Intent(this, ChangeProfile.class);
+        Intent intent = new Intent(this, Forgot.class);
         startActivity(intent);
     }
-
         //Input value username and password into database and checks if there is a user with that Username and has that password
     private void login(final String username,final String password){
         final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
@@ -184,19 +154,9 @@
                 param.put("username",username);
                 param.put("password",password);
                 return param;
-
             }
         };
         request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getmInstance(MainActivity.this).addToRequestQueue(request);
     }
-
-        @Override
-        public void onPointerCaptureChanged(boolean hasCapture) {
-
-        }
-
-
     }
-
-

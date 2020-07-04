@@ -20,9 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class Homepage extends Menu implements View.OnClickListener {
     Button math, physics, info, profile;
-    TextView welcome, searchinfo;
-    SearchView search;
-    String subject=null;
+    public static String subject=null;
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -34,17 +32,16 @@ public class Homepage extends Menu implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-
-       // drawerLayout = findViewById(R.id.drawer);
-       // toolbar = findViewById(R.id.toolbar);
-       // navigationView = findViewById(R.id.navigationView);
-       // setSupportActionBar(toolbar);
-       // getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-       // toggle = ne1w ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
-       // drawerLayout.addDrawerListener(toggle);
-       // toggle.syncState();
-       // navigationView.setNavigationItemSelectedListener(this);
+        drawerLayout = findViewById(R.id.drawer);
+        toolbar = findViewById(R.id.toolbar);
+        navigationView = findViewById(R.id.navigationView);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
 
         math = (Button) findViewById(R.id.mathBtn);
         physics = (Button) findViewById(R.id.physicsBtn);
@@ -60,10 +57,12 @@ public class Homepage extends Menu implements View.OnClickListener {
         if(!MainActivity.access.equals("Admin")){
             adminBtn.setVisibility(View.GONE);
         }
-
 }
-
-
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
     //Set what happens when you click a button
     public void onClick(View v) {
         switch (v.getId()) {
@@ -71,13 +70,13 @@ public class Homepage extends Menu implements View.OnClickListener {
                 subject = "Math";
                 openCourses();
                 break;
-
             case R.id.physicsBtn:
                 subject = "Physics";
                 openCourses();
                 break;
             case R.id.infoBtn:
-                openInfo();
+                openProfile();
+                //openInfo();
                 break;
             case R.id.profileBtn:
                 openProfile();
@@ -91,15 +90,13 @@ public class Homepage extends Menu implements View.OnClickListener {
         Intent profile = new Intent(this, Administration.class);
         startActivity(profile);
     }
-
     public void openProfile() {
         Intent profile = new Intent(this, ProfilePage.class);
         startActivity(profile);
     }
-
     public void openCourses(){
         Intent course = new Intent(this, Courses.class);
-        course.putExtra("SUBJECT",subject);
+        //course.putExtra("SUBJECT",subject);
         startActivity(course);
     }
     public void openInfo() {
