@@ -1,32 +1,29 @@
 package com.example.pa2576;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-public class Tasks extends AppCompatActivity implements View.OnClickListener {
-
+public class SeeReportedSolutions extends AppCompatActivity implements View.OnClickListener {
     ArrayList<Button> btnArray = new ArrayList<>();
-    public static String taskID;
-    String bookName;
+    public static String imgPathRep;
+    //DrawerLayout drawerLayout;
+    //Toolbar toolbar;
+    //NavigationView navigationView;
+    //ActionBarDrawerToggle toggle;
     private BooksModel bModel;
-    private BooksController bController;
+    public BooksController bController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,33 +31,32 @@ public class Tasks extends AppCompatActivity implements View.OnClickListener {
 
         bModel = new BooksModel(btnArray);
         bController = new BooksController(bModel);
-
+        //bModel.setNrofButtons(13);
+        //Toast.makeText(Courses.this, bController.getId()+"", Toast.LENGTH_SHORT).show();
         for (int i = 1; i <= bModel.getNrofButtons(); i++) {
             Button button = findViewById(getResources().getIdentifier("button" + i, "id", this.getPackageName()));
             btnArray.add(button);
             btnArray.get(i-1).setOnClickListener(this);
         }
         bController.setArray(btnArray);
-        bController.setUrl("http://10.0.2.2/tasks.php");
-        bController.getbtnDataFromDB("book",Books.bookName,"chapter",Chapter.chapter);
+        bController.setUrl("http://10.0.2.2/getReportedSolutions.php");
+        bController.setString("Reported Solution ");
+        bController.getbtnDataFromDB("","","","");
     }
+
+    @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        switch (v.getId()){
             default:
                 bController.getPressedBtnCtr(v.getId());
-                taskID = bController.getString();
-                openSolutions();
+                imgPathRep = bController.getString();
+                openSolution();
                 break;
         }
     }
-    public void onBackPressed(){
-        super.onBackPressed();
-        Intent intent = new Intent(this, Chapter.class);
-        startActivity(intent);
-    }
 
-    public void openSolutions(){
-        Intent intent = new Intent(this, SeeSolutions.class);
+    private void openSolution() {
+        Intent intent = new Intent(this, ViewSolution.class);
         startActivity(intent);
     }
 }

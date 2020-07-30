@@ -25,32 +25,32 @@
         android:id="@+id/upvoteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
+        android:layout_marginBottom="50dp"
         android:background="#FFFFFF"
         android:text="Upvote"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/downvoteBtn"
-        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/solutionImage"
+        app:layout_constraintTop_toBottomOf="@+id/commentToSolution"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/downvoteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
+        android:layout_marginBottom="50dp"
         android:background="#FFFFFF"
         android:text="Downvote"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.718"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/solutionImage"
+        app:layout_constraintTop_toBottomOf="@+id/commentToSolution"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -58,14 +58,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginBottom="50dp"
         android:text="Report"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintHorizontal_bias="0.839"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/solutionImage"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintTop_toBottomOf="@+id/commentToSolution"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/removeSolBtn"
@@ -74,10 +75,9 @@
         android:text="Remove Solution"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/report"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upvoteBtn"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintTop_toBottomOf="@+id/upvoteBtn" />
 
     <TextView
         android:id="@+id/commentToSolution"

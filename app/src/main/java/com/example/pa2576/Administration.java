@@ -9,16 +9,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class Administration extends  Menu implements View.OnClickListener {
+public class Administration extends Menu implements View.OnClickListener {
 
 
     Button removeUser;
     Button giveAccess;
+    Button seeReportedSolutions;
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -30,6 +32,7 @@ public class Administration extends  Menu implements View.OnClickListener {
 
         removeUser = findViewById(R.id.removeUser);
         giveAccess = findViewById(R.id.giveAccessBtn);
+        seeReportedSolutions = findViewById(R.id.seeReportedSolutions);
 
         drawerLayout = findViewById(R.id.drawer);
         toolbar = findViewById(R.id.toolbar);
@@ -44,6 +47,7 @@ public class Administration extends  Menu implements View.OnClickListener {
 
         removeUser.setOnClickListener(this);
         giveAccess.setOnClickListener(this);
+        seeReportedSolutions.setOnClickListener(this);
 
     }
 
@@ -57,7 +61,16 @@ public class Administration extends  Menu implements View.OnClickListener {
             case R.id.giveAccessBtn:
                 openGiveAccess();
                 break;
+            case R.id.seeReportedSolutions:
+                Toast.makeText(Administration.this, "Test", Toast.LENGTH_SHORT).show();
+                OpenSeeReportedSolutions();
+                break;
         }
+    }
+
+    private void OpenSeeReportedSolutions() {
+        Intent profile = new Intent(this, SeeReportedSolutions.class);
+        startActivity(profile);
     }
 
     private void openRemoveUser() {

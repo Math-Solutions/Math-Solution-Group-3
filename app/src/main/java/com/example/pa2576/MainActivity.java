@@ -127,7 +127,7 @@
                 if (loginArray[0].equals("Login Success")) {
                     progressDialog.dismiss();
                     access = loginArray[1];
-                    Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     if (loginState.isChecked()) {
                         editor.putString(getResources().getString(R.string.prefLoginState), "Loggedin");

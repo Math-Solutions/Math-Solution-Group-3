@@ -35,11 +35,11 @@ import java.util.Map;
     public class ViewSolution  extends AppCompatActivity implements View.OnClickListener {
 
         ImageView solutionPhoto;
-        TextView comment;
+        public static TextView comment;
         Button removeSolBtn,upVotebtn,downVotebtn,reportbtn;
         String name = SeeSolutions.nameOfPhoto;
         int votes = SeeSolutions.totalVotes;
-        String imagePath;
+        public static String imagePath = "";
         int voteCheck=0;
         String username;
         Button fullScreen;
@@ -89,16 +89,24 @@ import java.util.Map;
                         voteCheck++;
                     }
                 case R.id.report:
+                    openReportActivity();
                     break;
                 case R.id.fullScreenBtn:
-                    setContentView(R.layout.activity_fullscreen);
-                    //viewImage(fullScreenImage);
+                    openFullScreenImage();
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + v.getId());
             }
         }
-        private void viewImage(ImageView image) {
+        private void openReportActivity() {
+            Intent intent = new Intent(this, ReportedSolution.class);
+            startActivity(intent);
+        }
+        private void openFullScreenImage(){
+            Intent intent = new Intent(this, FullScreenImage.class);
+            startActivity(intent);
+        }
+        public static void viewImage(ImageView image) {
             String url = "http://10.0.2.2/" + imagePath;
             Picasso.get().load(url).into(image);
         }
@@ -176,6 +184,7 @@ import java.util.Map;
             request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             MySingleton.getmInstance(ViewSolution.this).addToRequestQueue(request);
         }
+        //Get the choosen solution from the database by using the name of the image and get the comment and imagepath.
         private void getSolution(final String name) {
             final ProgressDialog progressDialog = new ProgressDialog(ViewSolution.this);
             progressDialog.setCancelable(false);
@@ -196,7 +205,12 @@ import java.util.Map;
                         progressDialog.dismiss();
                         reportbtn.setText(response);
                         String[] getData = reportbtn.getText().toString().split(",");
-                        imagePath =  getData[0];
+                        if(imagePath.equals("")) {
+                            imagePath = getData[0];
+                        }
+                        else{
+                            imagePath = SeeReportedSolutions.imgPathRep;
+                        }
                         username = getData[2];
                         reportbtn.setText("Report");
                         comment.setText(getData[1]);
@@ -224,8 +238,5 @@ import java.util.Map;
             };
             request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             MySingleton.getmInstance(ViewSolution.this).addToRequestQueue(request);
-
         }
     }
-
-

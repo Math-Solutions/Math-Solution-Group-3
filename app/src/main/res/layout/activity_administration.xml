@@ -21,6 +21,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/seeReportedSolutions"
+        android:layout_width="123dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="40dp"
+        android:text="See Reported Solutions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/removeUser" />
+
+    <Button
         android:id="@+id/giveAccessBtn"
         android:layout_width="119dp"
         android:layout_height="82dp"
@@ -30,4 +41,5 @@
         android:text="Give Access"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

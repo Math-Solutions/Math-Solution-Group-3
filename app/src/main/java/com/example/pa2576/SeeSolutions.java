@@ -42,7 +42,6 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_seesolutions);
 
-
             idArraybtn.add(R.id.teacherSolOne);
             idArraybtn.add(R.id.teacherSolTwo);
             idArraybtn.add(R.id.teacherSolThree);
@@ -61,11 +60,7 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
             idArrayVotes.add(R.id.voteStuFour);
             idArrayVotes.add(R.id.voteStuFive);
 
-
             add = findViewById(R.id.addSolution);
-
-
-
             add.setOnClickListener(this);
             for (int id : idArraybtn) {
                 Button btn = findViewById(id);
@@ -75,18 +70,13 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
                 TextView view = findViewById(id);
                 votTextArray.add(view);
             }
-
             for (int i = 0; i < btnArray.size(); i++) {
                 btnArray.get(i).setOnClickListener(this);
                 votesArray[i] = "";
                 nameOfPhotoArray[i] = "";
-
             }
-
             getTasks(Books.bookName,Tasks.taskID,"Student");
             getTasks(Books.bookName,Tasks.taskID,"Teacher");
-            Toast.makeText(SeeSolutions.this, btnArray.get(6).getText().toString(), Toast.LENGTH_SHORT).show();
-
 
         }
     public void onBackPressed(){
@@ -97,20 +87,14 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
     public void setTextBtn(String[] array) {
         int index=0;
         for (int i = 0; i <btnArray.size() ; i++) {
-
             if (!array[i].equals("")) {
-
                 btnArray.get(i).setText("Solution " + (i + 1));
                 votTextArray.get(i).setText(votesArray[i]);
                 if (i > 2) {
-
                     btnArray.get(i).setText("Solution " + (index + 1));
                     votTextArray.get(i).setText(votesArray[i]);
                     index++;
-
-
                 }
-
             }
         }
         if((MainActivity.access.equals("Student") || MainActivity.access.equals("Admin")) && btnArray.get(7).getText().toString().equals("Solution 5")){
@@ -120,9 +104,6 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
             add.setVisibility(View.GONE);
         }
     }
-
-
-
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addSolution:
@@ -134,26 +115,17 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
-
-
     private void checkPressedBtn(int id) {
-
-
         for (int i = 0; i < btnArray.size(); i++) {
             if (btnArray.get(i).getId() == id) {
                 Intent intent = new Intent(this, ViewSolution.class);
                 nameOfPhoto = nameOfPhotoArray[i];
                 totalVotes =  Integer.parseInt(votesArray[i]);
-                Toast.makeText(SeeSolutions.this,nameOfPhoto, Toast.LENGTH_SHORT).show();
-
                 startActivity(intent);
             }
         }
     }
-
     public void sortDataFromDataseIntoArrays(String[] imgArray, String[] votArray,String userType){
-
             if(userType.equals("Teacher")){
                 for (int i = 0; i < imgArray.length; i++) {
                     nameOfPhotoArray[i] = imgArray[i];
@@ -164,13 +136,9 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
                 for (int i = 0; i < imgArray.length; i++) {
                     nameOfPhotoArray[i+3] = imgArray[i];
                     votesArray[i+3] = votArray[i];
-
                 }
             }
-
-
     }
-
     public void getTasks(final String book, final String task, final String userType) {
         final ProgressDialog progressDialog = new ProgressDialog(SeeSolutions.this);
         progressDialog.setCancelable(false);
@@ -179,16 +147,11 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
         progressDialog.show();
         String url = "http://10.0.2.2/getAllSolutions.php";
 
-
-
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 if(response.equals("no images found")){
                     progressDialog.dismiss();
-
-
                     setTextBtn(nameOfPhotoArray);
                 }
                 else{
@@ -199,19 +162,14 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
                     String[] votArray  = taskArray[1].split(",");
                     btnArray.get(0).setText("");
                     sortDataFromDataseIntoArrays(imgArray,votArray,userType);
-
                     setTextBtn(nameOfPhotoArray);
-
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
                 Toast.makeText(SeeSolutions.this, error.toString(), Toast.LENGTH_SHORT).show();
-
             }
         }
         ) {
@@ -221,14 +179,10 @@ public class SeeSolutions extends AppCompatActivity implements View.OnClickListe
                 param.put("task",task);
                 param.put("userType",userType);
                 return param;
-
             }
-
         };
         request.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getmInstance(SeeSolutions.this).addToRequestQueue(request);
-
-
     }
 
 /*
