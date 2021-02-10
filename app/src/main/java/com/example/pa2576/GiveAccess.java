@@ -36,13 +36,11 @@ public class GiveAccess extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_give_access);
 
-
         enterUser = findViewById(R.id.giveAccessUser);
         giveAccess = findViewById(R.id.giveAccessToUserBtn);
         radioGroupAccess = findViewById(R.id.radioGroupAccess);
         radioBtnAdmin = findViewById(R.id.radioButtonAdmin);
         radioBtnTeacher = findViewById(R.id.radioButtonTeacher);
-
         giveAccess.setOnClickListener(new View.OnClickListener() {
                                           public void onClick(View v) {
                                               if (radioGroupAccess.getCheckedRadioButtonId() == -1) {
@@ -65,7 +63,6 @@ public class GiveAccess extends AppCompatActivity {
 
 
     }
-
     private void giveAccessMethod(final String username, final String userType) {
         final ProgressDialog progressDialog = new ProgressDialog(GiveAccess.this);
         progressDialog.setCancelable(false);
@@ -73,7 +70,6 @@ public class GiveAccess extends AppCompatActivity {
         progressDialog.setTitle("Retrieving image to database");
         progressDialog.show();
         String url = "http://10.0.2.2/giveAccess.php";
-
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -83,16 +79,11 @@ public class GiveAccess extends AppCompatActivity {
                 if(response.equals("Users access have been changed")){
                     progressDialog.dismiss();
                     opeAdministration();
-
-
                 }
                 else{
                     progressDialog.dismiss();
-
                     Toast.makeText(GiveAccess.this, response, Toast.LENGTH_SHORT).show();
-
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -102,32 +93,19 @@ public class GiveAccess extends AppCompatActivity {
             }
         }
         ) {
-
-
             //here is the variables that goes into the php code
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> param = new HashMap<>();
                 param.put("username",username);
                 param.put("userType",userType);
-
-
-
                 return param;
-
             }
         };
-
         request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         MySingleton.getmInstance(GiveAccess.this).addToRequestQueue(request);
-
     }
-
-
-
     private void opeAdministration() {
         Intent profile = new Intent(this, Administration.class);
         startActivity(profile);
     }
-
-
 }

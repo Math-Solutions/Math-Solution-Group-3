@@ -118,9 +118,6 @@ public class CreateAccount extends AppCompatActivity {
 
 
     }
-
-
-
     // checks that every criteria for the account to be created is forfilled
     public boolean checkIfFilled() {
 
@@ -130,7 +127,9 @@ public class CreateAccount extends AppCompatActivity {
             setColorText(red);
             Toast.makeText(CreateAccount.this, "Please fill in all the things that are red", Toast.LENGTH_SHORT).show();
             return false;
-        } else if (!checkPassword()) {
+
+            //checks if the checkpassord metod is true and if the passwords match eachother
+        } else if (!checkPassword() || !createPassword.getText().toString().equals(createPassword2.getText().toString())) {
             setcolorPassword(red);
             Toast.makeText(CreateAccount.this, "The password does not match the criteria or the two passwords do not match", Toast.LENGTH_SHORT).show();
 

@@ -23,7 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+//See all the solutions of the teachers and students and also adds new solutions.
 public class SeeSolutions extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<Integer> idArraybtn = new ArrayList<>();

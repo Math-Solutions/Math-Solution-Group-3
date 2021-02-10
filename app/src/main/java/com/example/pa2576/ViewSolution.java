@@ -31,7 +31,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//This class is in charge of displaying the solution image, the comment and here can you remove the solution, report in, up and downvote it and go to fullscreen of the image
     public class ViewSolution  extends AppCompatActivity implements View.OnClickListener {
 
         ImageView solutionPhoto;
@@ -65,11 +65,13 @@ import java.util.Map;
             fullScreen.setOnClickListener(this);
             getSolution(name);
         }
-        public void onBackPressed(){
+        //when the return button is pressed go to the SeeSolutions view
+     /*   public void onBackPressed(){
             super.onBackPressed();
             Intent intent = new Intent(this, SeeSolutions.class);
             startActivity(intent);
-        }
+        }*/
+        //Here is the onClick method and here you can see what will happen depending on which button you press
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.removeSolBtn:
@@ -106,10 +108,12 @@ import java.util.Map;
             Intent intent = new Intent(this, FullScreenImage.class);
             startActivity(intent);
         }
+        //takes the image path and loads in the image into the imageView
         public static void viewImage(ImageView image) {
             String url = "http://10.0.2.2/" + imagePath;
             Picasso.get().load(url).into(image);
         }
+        //Updates how many votes the solution have. Now you can only vote one time but if you exit the solution and enter again you can vote again
         private void updateVotes(final String name,final String votes) {
             final ProgressDialog progressDialog = new ProgressDialog(ViewSolution.this);
             progressDialog.setCancelable(false);
@@ -144,6 +148,7 @@ import java.util.Map;
             request.setRetryPolicy(new DefaultRetryPolicy(30000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             MySingleton.getmInstance(ViewSolution.this).addToRequestQueue(request);
         }
+        //removes the solution. Read the PHP file for more info. Fix so the picture in the folder also is removed not only the database.
         private void removeSolution(final String name) {
             final ProgressDialog progressDialog = new ProgressDialog(ViewSolution.this);
             progressDialog.setCancelable(false);
@@ -205,11 +210,11 @@ import java.util.Map;
                         progressDialog.dismiss();
                         reportbtn.setText(response);
                         String[] getData = reportbtn.getText().toString().split(",");
-                        if(imagePath.equals("")) {
+                        if(imagePath.equals("") ) {
                             imagePath = getData[0];
                         }
                         else{
-                            imagePath = SeeReportedSolutions.imgPathRep;
+                           // imagePath = SeeReportedSolutions.imgPathRep;
                         }
                         username = getData[2];
                         reportbtn.setText("Report");

@@ -20,7 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//Here is it where the user reports a solution
 public class ReportedSolution extends AppCompatActivity {
 
     ImageView solutionPhoto;
@@ -48,6 +48,7 @@ public class ReportedSolution extends AppCompatActivity {
         Intent intent = new Intent(this, ViewSolution.class);
         startActivity(intent);
     }
+    //Reports the solution and insert comment on why it is reported who reported it and the imagepath of the solution ( should be name)
     private void setDataComment(final String reportComment,final String username, final String solutionName) {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
